@@ -12,14 +12,7 @@ final class XsdType
     private string $xmlNamespace = '';
     private string $xmlNamespaceName = '';
 
-    /**
-     * TODO : Define type occurs, extends, enums, ...
-     */
-    private array $meta;
-
-    /**
-     * TODO : What was this again?
-     */
+    private array $meta = [];
     private array $memberTypes = [];
 
     public function __construct(string $name)

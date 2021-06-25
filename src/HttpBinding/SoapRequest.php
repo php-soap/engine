@@ -4,6 +4,9 @@ namespace Soap\Engine\HttpBinding;
 
 class SoapRequest
 {
+    public const SOAP_1_1 = 1;
+    public const SOAP_1_2 = 2;
+
     private string $request;
     private string $location;
     private string $action;
@@ -41,12 +44,12 @@ class SoapRequest
 
     public function isSOAP11(): bool
     {
-        return $this->getVersion() === SOAP_1_1;
+        return $this->getVersion() === self::SOAP_1_1;
     }
 
     public function isSOAP12(): bool
     {
-        return $this->getVersion() === SOAP_1_2;
+        return $this->getVersion() === self::SOAP_1_2;
     }
 
     public function getOneWay(): int

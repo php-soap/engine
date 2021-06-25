@@ -29,6 +29,6 @@ final class SimpleEngine implements Engine
 
     public function getMetadata(): Metadata
     {
-        $this->driver->getMetadata();
+        return $this->driver->getMetadata();
     }
 }

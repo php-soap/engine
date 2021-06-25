@@ -15,6 +15,14 @@
         }
     ],
     "require": {
-        "php": "^7.4 || ^8.0"
+        "php": "^8.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SoapTest\\Engine\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
     }
 }
