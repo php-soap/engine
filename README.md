@@ -21,6 +21,32 @@ Every component above can be used seperately in order to create your own customi
 composer install php-soap/engine
 ```
 
+## Engines
+
+This package provides engines that can be used in a generic way:
+
+### SimpleEngine
+
+The SimpleEngine is a wrapper around a previous defined `Driver` and a `Transport` implementation.
+
+```php
+use Soap\Engine\SimpleEngine;
+
+$engine = new SimpleEngine($driver,$transport);
+```
+
+### LazyEngine
+
+You don't want to be loading WSDL files or SOAP services if you don't need to.
+By wrapping an engine in a lazy engine, you can prevent any WSDL loading from happening before actually requesting a resource.
+
+```php
+use Soap\Engine\SimpleEngine;
+use Soap\Engine\LazyEngine;
+
+$engine = new LazyEngine(fn () => new SimpleEngine($driver, $transport));
+```
+
 ## List of available components:
 
 * [ext-soap-engine](https://github.com/php-soap/ext-soap-engine): An engine based on PHP's ext-soap.
