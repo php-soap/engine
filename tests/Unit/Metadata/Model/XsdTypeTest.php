@@ -9,7 +9,6 @@ use Soap\Engine\Metadata\Model\XsdType;
 
 final class XsdTypeTest extends TestCase
 {
-    
     public function test_it_contains_only_a_name()
     {
         $type = XsdType::create('myType');
