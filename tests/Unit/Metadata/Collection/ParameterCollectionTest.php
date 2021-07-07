@@ -9,7 +9,7 @@ use Soap\Engine\Metadata\Collection\ParameterCollection;
 use Soap\Engine\Metadata\Model\Parameter;
 use Soap\Engine\Metadata\Model\XsdType;
 
-class ParameterCollectionTest extends TestCase
+final class ParameterCollectionTest extends TestCase
 {
     private ParameterCollection $collection;
 
@@ -20,10 +20,10 @@ class ParameterCollectionTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_can_iterate_over_parameters(): void
+    
+    public function test_it_can_iterate_over_parameters(): void
     {
-        self::assertCount(1, $this->collection);
-        self::assertSame([...$this->collection], $this->collection->map(static fn ($item) => $item));
+        static::assertCount(1, $this->collection);
+        static::assertSame([...$this->collection], $this->collection->map(static fn ($item) => $item));
     }
 }

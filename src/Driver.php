@@ -1,11 +1,11 @@
 <?php
 
-declare( strict_types=1 );
+declare(strict_types=1);
 
 namespace Soap\Engine;
 
 use Soap\Engine\Metadata\MetadataProvider;
 
-interface Driver extends Encoder, Decoder, MetadataProvider
+interface Driver extends Decoder, Encoder, MetadataProvider
 {
 }

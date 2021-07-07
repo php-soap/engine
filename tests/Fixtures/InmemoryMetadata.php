@@ -8,7 +8,7 @@ use Soap\Engine\Metadata\Collection\MethodCollection;
 use Soap\Engine\Metadata\Collection\TypeCollection;
 use Soap\Engine\Metadata\Metadata;
 
-class InmemoryMetadata implements Metadata
+final class InmemoryMetadata implements Metadata
 {
     private TypeCollection $types;
     private MethodCollection $methods;

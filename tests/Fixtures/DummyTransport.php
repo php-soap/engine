@@ -8,7 +8,7 @@ use Soap\Engine\HttpBinding\SoapRequest;
 use Soap\Engine\HttpBinding\SoapResponse;
 use Soap\Engine\Transport;
 
-class DummyTransport implements Transport
+final class DummyTransport implements Transport
 {
     private string $response;
 

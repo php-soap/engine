@@ -12,7 +12,7 @@ use SoapTest\Engine\Fixtures\DummyTransport;
 use SoapTest\Engine\Fixtures\InmemoryMetadata;
 use SoapTest\Engine\Fixtures\PassThroughDriver;
 
-class SimpleEngineTest extends TestCase
+final class SimpleEngineTest extends TestCase
 {
     private SimpleEngine $engine;
     private Metadata $metadata;
@@ -31,14 +31,14 @@ class SimpleEngineTest extends TestCase
     }
 
 
-    public function testItCanRequestSoap()
+    public function test_it_can_request_soap()
     {
         $response = $this->engine->request('hello', ['world']);
-        self::assertSame(['object'], $response);
+        static::assertSame(['object'], $response);
     }
 
-    public function testItCanLoadMetadata()
+    public function test_it_can_load_metadata()
     {
-        self::assertSame($this->metadata, $this->engine->getMetadata());
+        static::assertSame($this->metadata, $this->engine->getMetadata());
     }
 }

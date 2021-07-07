@@ -12,13 +12,16 @@ use Soap\Engine\Metadata\Model\XsdType;
 /**
  * @implements IteratorAggregate<XsdType>
  */
-final class XsdTypeCollection implements IteratorAggregate, Countable
+final class XsdTypeCollection implements Countable, IteratorAggregate
 {
     /**
-     * @var XsdType[]
+     * @var list<XsdType>
      */
     private array $types;
 
+    /**
+     * @no-named-arguments
+     */
     public function __construct(XsdType ...$types)
     {
         $this->types = $types;

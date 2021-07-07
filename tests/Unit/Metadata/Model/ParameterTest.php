@@ -8,13 +8,13 @@ use PHPUnit\Framework\TestCase;
 use Soap\Engine\Metadata\Model\Parameter;
 use Soap\Engine\Metadata\Model\XsdType;
 
-class ParameterTest extends TestCase
+final class ParameterTest extends TestCase
 {
-    public function testParameter()
+    public function test_parameter()
     {
         $param = new Parameter('name', $type = XsdType::create('string'));
 
-        self::assertSame($param->getName(), 'name');
-        self::assertSame($param->getType(), $type);
+        static::assertSame($param->getName(), 'name');
+        static::assertSame($param->getType(), $type);
     }
 }

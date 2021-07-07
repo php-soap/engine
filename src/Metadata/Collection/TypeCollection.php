@@ -13,13 +13,16 @@ use Soap\Engine\Metadata\Model\Type;
 /**
  * @implements IteratorAggregate<Type>
  */
-final class TypeCollection implements IteratorAggregate, Countable
+final class TypeCollection implements Countable, IteratorAggregate
 {
     /**
      * @var list<Type>
      */
     private array $types;
 
+    /**
+     * @no-named-arguments
+     */
     public function __construct(Type ...$types)
     {
         $this->types = $types;

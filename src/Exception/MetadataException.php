@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Soap\Engine\Exception;
 
-class MetadataException extends RuntimeException
+final class MetadataException extends RuntimeException
 {
     public static function typeNotFound(string $name): self
     {

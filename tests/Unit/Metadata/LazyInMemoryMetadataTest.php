@@ -9,19 +9,19 @@ use Soap\Engine\Metadata\Collection\TypeCollection;
 use Soap\Engine\Metadata\LazyInMemoryMetadata;
 use Soap\Engine\Metadata\Metadata;
 
-class LazyInMemoryMetadataTest extends TestCase
+final class LazyInMemoryMetadataTest extends TestCase
 {
     private Metadata $metadata;
 
     protected function setUp(): void
     {
         $this->metadata = $this->createMock(Metadata::class);
-        $this->metadata->expects($this->once())->method('getTypes')->willReturn(new TypeCollection());
-        $this->metadata->expects($this->once())->method('getMethods')->willReturn(new MethodCollection());
+        $this->metadata->expects(static::once())->method('getTypes')->willReturn(new TypeCollection());
+        $this->metadata->expects(static::once())->method('getMethods')->willReturn(new MethodCollection());
     }
 
-    /** @test */
-    public function it_lazily_loads_and_remembers_metadata(): void
+    
+    public function test_it_lazily_loads_and_remembers_metadata(): void
     {
         $lazy = new LazyInMemoryMetadata($this->metadata);
 
@@ -30,7 +30,7 @@ class LazyInMemoryMetadataTest extends TestCase
         $methods1 = $lazy->getMethods();
         $methods2 = $lazy->getMethods();
 
-        self::assertSame($types1, $types2);
-        self::assertSame($methods1, $methods2);
+        static::assertSame($types1, $types2);
+        static::assertSame($methods1, $methods2);
     }
 }

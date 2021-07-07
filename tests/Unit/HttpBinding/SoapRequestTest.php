@@ -7,16 +7,16 @@ namespace SoapTest\Engine\HttpBinding;
 use PHPUnit\Framework\TestCase;
 use Soap\Engine\HttpBinding\SoapRequest;
 
-class SoapRequestTest extends TestCase
+final class SoapRequestTest extends TestCase
 {
-    public function testRequest()
+    public function test_request()
     {
         $request = new SoapRequest('requestbody', 'location', 'action', SoapRequest::SOAP_1_1, 0);
 
-        self::assertSame('requestbody', $request->getRequest());
-        self::assertSame('location', $request->getLocation());
-        self::assertSame('action', $request->getAction());
-        self::assertSame(SoapRequest::SOAP_1_1, $request->getVersion());
-        self::assertSame(0, $request->getOneWay());
+        static::assertSame('requestbody', $request->getRequest());
+        static::assertSame('location', $request->getLocation());
+        static::assertSame('action', $request->getAction());
+        static::assertSame(SoapRequest::SOAP_1_1, $request->getVersion());
+        static::assertSame(0, $request->getOneWay());
     }
 }

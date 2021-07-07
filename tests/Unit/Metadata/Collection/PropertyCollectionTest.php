@@ -9,7 +9,7 @@ use Soap\Engine\Metadata\Collection\PropertyCollection;
 use Soap\Engine\Metadata\Model\Property;
 use Soap\Engine\Metadata\Model\XsdType;
 
-class PropertyCollectionTest extends TestCase
+final class PropertyCollectionTest extends TestCase
 {
     private PropertyCollection $collection;
 
@@ -20,10 +20,10 @@ class PropertyCollectionTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_can_iterate_over_properties(): void
+    
+    public function test_it_can_iterate_over_properties(): void
     {
-        self::assertCount(1, $this->collection);
-        self::assertSame([...$this->collection], $this->collection->map(static fn ($item) => $item));
+        static::assertCount(1, $this->collection);
+        static::assertSame([...$this->collection], $this->collection->map(static fn ($item) => $item));
     }
 }

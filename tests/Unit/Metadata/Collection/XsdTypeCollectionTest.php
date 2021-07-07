@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace SoapTest\Engine\Metadata\Collection;
 
 use PHPUnit\Framework\TestCase;
-use Soap\Engine\Exception\MetadataException;
 use Soap\Engine\Metadata\Collection\XsdTypeCollection;
 use Soap\Engine\Metadata\Model\XsdType;
 
-class XsdTypeCollectionTest extends TestCase
+final class XsdTypeCollectionTest extends TestCase
 {
     private XsdTypeCollection $collection;
 
@@ -20,25 +19,25 @@ class XsdTypeCollectionTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_can_iterate_over_xsdTypes(): void
+    
+    public function test_it_can_iterate_over_xsd_types(): void
     {
-        self::assertCount(1, $this->collection);
-        self::assertSame([...$this->collection], $this->collection->map(static fn ($item) => $item));
+        static::assertCount(1, $this->collection);
+        static::assertSame([...$this->collection], $this->collection->map(static fn ($item) => $item));
     }
 
-    /** @test */
-    public function it_can_fetch_by_name(): void
+    
+    public function test_it_can_fetch_by_name(): void
     {
         $xsdType = $this->collection->fetchByNameWithFallback('Object');
-        self::assertSame('Object', $xsdType->getName());
+        static::assertSame('Object', $xsdType->getName());
     }
 
-    /** @test */
-    public function it_can_fetch_by_name_with_fallback(): void
+    
+    public function test_it_can_fetch_by_name_with_fallback(): void
     {
         $xsdType = $this->collection->fetchByNameWithFallback('time');
-        self::assertSame('time', $xsdType->getName());
-        self::assertSame('string', $xsdType->getBaseType());
+        static::assertSame('time', $xsdType->getName());
+        static::assertSame('string', $xsdType->getBaseType());
     }
 }

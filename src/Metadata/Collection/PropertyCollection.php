@@ -12,13 +12,16 @@ use Soap\Engine\Metadata\Model\Property;
 /**
  * @implements IteratorAggregate<Property>
  */
-final class PropertyCollection implements IteratorAggregate, Countable
+final class PropertyCollection implements Countable, IteratorAggregate
 {
     /**
-     * @var Property[]
+     * @var list<Property>
      */
     private array $properties;
 
+    /**
+     * @no-named-arguments
+     */
     public function __construct(Property ...$properties)
     {
         $this->properties = $properties;

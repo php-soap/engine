@@ -11,7 +11,7 @@ use Soap\Engine\Metadata\Collection\ParameterCollection;
 use Soap\Engine\Metadata\Model\Method;
 use Soap\Engine\Metadata\Model\XsdType;
 
-class MethodCollectionTest extends TestCase
+final class MethodCollectionTest extends TestCase
 {
     private MethodCollection $collection;
 
@@ -22,22 +22,22 @@ class MethodCollectionTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_can_iterate_over_methods(): void
+    
+    public function test_it_can_iterate_over_methods(): void
     {
-        self::assertCount(1, $this->collection);
-        self::assertSame([...$this->collection], $this->collection->map(static fn ($item) => $item));
+        static::assertCount(1, $this->collection);
+        static::assertSame([...$this->collection], $this->collection->map(static fn ($item) => $item));
     }
 
-    /** @test */
-    public function it_can_fetch_by_name(): void
+    
+    public function test_it_can_fetch_by_name(): void
     {
         $method = $this->collection->fetchByName('hello');
-        self::assertSame('hello', $method->getName());
+        static::assertSame('hello', $method->getName());
     }
 
-    /** @test */
-    public function it_can_fail_fetching_by_name(): void
+    
+    public function test_it_can_fail_fetching_by_name(): void
     {
         $this->expectException(MetadataException::class);
         $this->collection->fetchByName('nope');

@@ -5,108 +5,105 @@ declare(strict_types=1);
 namespace SoapTest\Engine\Metadata\Model;
 
 use PHPUnit\Framework\TestCase;
-use Soap\Engine\Metadata\Collection\PropertyCollection;
-use Soap\Engine\Metadata\Model\Property;
-use Soap\Engine\Metadata\Model\Type;
 use Soap\Engine\Metadata\Model\XsdType;
 
-class XsdTypeTest extends TestCase
+final class XsdTypeTest extends TestCase
 {
-    /** @test */
-    function it_contains_only_a_name()
+    
+    public function test_it_contains_only_a_name()
     {
         $type = XsdType::create('myType');
 
-        self::assertSame('myType', $type->getName());
-        self::assertSame('myType', $type->getBaseTypeOrFallbackToName());
-        self::assertSame('', $type->getXmlNamespace());
-        self::assertSame('', $type->getXmlNamespaceName());
-        self::assertSame('', $type->getBaseType());
-        self::assertSame([], $type->getMemberTypes());
+        static::assertSame('myType', $type->getName());
+        static::assertSame('myType', $type->getBaseTypeOrFallbackToName());
+        static::assertSame('', $type->getXmlNamespace());
+        static::assertSame('', $type->getXmlNamespaceName());
+        static::assertSame('', $type->getBaseType());
+        static::assertSame([], $type->getMemberTypes());
     }
 
-    /** @test */
-    function it_cannot_guess_unknown_types()
+    
+    public function test_it_cannot_guess_unknown_types()
     {
         $type = XsdType::guess('myType');
-        self::assertSame('myType', $type->getName());
-        self::assertSame('', $type->getBaseType());
+        static::assertSame('myType', $type->getName());
+        static::assertSame('', $type->getBaseType());
     }
 
-    /** @test */
-    function it_can_guess_known_types()
+    
+    public function test_it_can_guess_known_types()
     {
         foreach (XsdType::fetchAllKnownBaseTypeMappings() as $typeName => $baseType) {
             $type = XsdType::guess($typeName);
-            self::assertSame($typeName, $type->getName());
-            self::assertSame($baseType, $type->getBaseType());
+            static::assertSame($typeName, $type->getName());
+            static::assertSame($baseType, $type->getBaseType());
         }
     }
 
-    /** @test */
-    function it_can_add_base_type()
+    
+    public function test_it_can_add_base_type()
     {
         $type = XsdType::create('myType')->withBaseType('baseType');
 
-        self::assertSame('myType', $type->getName());
-        self::assertSame('baseType', $type->getBaseType());
-        self::assertSame('baseType', $type->getBaseTypeOrFallbackToName());
+        static::assertSame('myType', $type->getName());
+        static::assertSame('baseType', $type->getBaseType());
+        static::assertSame('baseType', $type->getBaseTypeOrFallbackToName());
     }
 
-    /** @test */
-    function it_can_add_known_base_type_and_move_actual_type_to_member_types()
+    
+    public function test_it_can_add_known_base_type_and_move_actual_type_to_member_types()
     {
         foreach (XsdType::fetchAllKnownBaseTypeMappings() as $typeName => $baseType) {
             $new = XsdType::create('myType')->withBaseType($typeName);
 
-            self::assertSame('myType', $new->getName());
-            self::assertSame($baseType, $new->getBaseType());
-            self::assertSame($baseType, $new->getBaseTypeOrFallbackToName());
-            self::assertSame([$typeName], $new->getMemberTypes());
+            static::assertSame('myType', $new->getName());
+            static::assertSame($baseType, $new->getBaseType());
+            static::assertSame($baseType, $new->getBaseTypeOrFallbackToName());
+            static::assertSame([$typeName], $new->getMemberTypes());
         }
     }
 
-    /** @test */
-    function it_can_add_member_types()
+    
+    public function test_it_can_add_member_types()
     {
         $new = XsdType::create('myType')->withMemberTypes($types = ['type1', 'type2']);
 
-        self::assertSame('myType', $new->getName());
-        self::assertSame($types, $new->getMemberTypes());
+        static::assertSame('myType', $new->getName());
+        static::assertSame($types, $new->getMemberTypes());
     }
 
-    /** @test */
-    function it_can_add_xml_namespace()
+    
+    public function test_it_can_add_xml_namespace()
     {
         $new = XsdType::create('myType')->withXmlNamespace($namespace = 'http://www.w3.org/2001/XMLSchema');
 
-        self::assertSame('myType', $new->getName());
-        self::assertSame($namespace, $new->getXmlNamespace());
+        static::assertSame('myType', $new->getName());
+        static::assertSame($namespace, $new->getXmlNamespace());
     }
 
-    /** @test */
-    function it_can_add_xml_namespace_name()
+    
+    public function test_it_can_add_xml_namespace_name()
     {
         $new = XsdType::create('myType')->withXmlNamespaceName($namespace = 'hello');
 
-        self::assertSame('myType', $new->getName());
-        self::assertSame('hello', $new->getXmlNamespaceName());
+        static::assertSame('myType', $new->getName());
+        static::assertSame('hello', $new->getXmlNamespaceName());
     }
 
-    /** @test */
-    function it_can_add_meta()
+    
+    public function test_it_can_add_meta()
     {
         $new = XsdType::create('myType')->withMeta($meta = ['minOccurs' => 1]);
 
-        self::assertSame('myType', $new->getName());
-        self::assertSame($meta, $new->getMeta());
+        static::assertSame('myType', $new->getName());
+        static::assertSame($meta, $new->getMeta());
     }
 
-    /** @test */
-    function it_can_return_name_as_string()
+    
+    public function test_it_can_return_name_as_string()
     {
         $new = XsdType::create('myType');
 
-        self::assertSame('myType', (string) $new);
+        static::assertSame('myType', (string) $new);
     }
 }

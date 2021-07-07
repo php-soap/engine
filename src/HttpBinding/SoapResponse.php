@@ -1,8 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Soap\Engine\HttpBinding;
 
-class SoapResponse
+final class SoapResponse
 {
     private string $payload;
 

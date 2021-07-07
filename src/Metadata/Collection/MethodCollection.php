@@ -13,13 +13,16 @@ use Soap\Engine\Metadata\Model\Method;
 /**
  * @implements IteratorAggregate<Method>
  */
-final class MethodCollection implements IteratorAggregate, Countable
+final class MethodCollection implements Countable, IteratorAggregate
 {
     /**
-     * @var Method[]
+     * @var list<Method>
      */
     private array $methods;
 
+    /**
+     * @no-named-arguments
+     */
     public function __construct(Method ...$methods)
     {
         $this->methods = $methods;

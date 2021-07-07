@@ -1,8 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Soap\Engine\HttpBinding;
 
-class SoapRequest
+final class SoapRequest
 {
     public const SOAP_1_1 = 1;
     public const SOAP_1_2 = 2;

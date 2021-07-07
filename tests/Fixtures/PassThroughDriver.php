@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace SoapTest\Engine\Fixtures;
 
@@ -7,7 +7,7 @@ use Soap\Engine\HttpBinding\SoapRequest;
 use Soap\Engine\HttpBinding\SoapResponse;
 use Soap\Engine\Metadata\Metadata;
 
-class PassThroughDriver implements Driver
+final class PassThroughDriver implements Driver
 {
     private string $request;
     private array $response;

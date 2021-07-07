@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace SoapTest\Engine;
 
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 use Soap\Engine\LazyEngine;
 use Soap\Engine\Metadata\Metadata;
 use Soap\Engine\SimpleEngine;
@@ -13,7 +14,7 @@ use SoapTest\Engine\Fixtures\DummyTransport;
 use SoapTest\Engine\Fixtures\InmemoryMetadata;
 use SoapTest\Engine\Fixtures\PassThroughDriver;
 
-class LazyEngineTest extends TestCase
+final class LazyEngineTest extends TestCase
 {
     private LazyEngine $engine;
     private Metadata $metadata;
@@ -36,23 +37,23 @@ class LazyEngineTest extends TestCase
         );
     }
 
-    public function testItCanRequestSoap()
+    public function test_it_can_request_soap()
     {
         $response = $this->engine->request('hello', ['world']);
-        self::assertSame(['object'], $response);
+        static::assertSame(['object'], $response);
     }
 
-    public function testItCanLoadMetadata()
+    public function test_it_can_load_metadata()
     {
-        self::assertSame($this->metadata, $this->engine->getMetadata());
+        static::assertSame($this->metadata, $this->engine->getMetadata());
     }
 
-    public function testIt_does_not_load_until_needed(): void
+    public function test_it_does_not_load_until_needed(): void
     {
         $this->expectNotToPerformAssertions();
 
-        new LazyEngine(function () {
-            throw new \RuntimeException('You shall not pass!');
+        new LazyEngine(static function () {
+            throw new RuntimeException('You shall not pass!');
         });
     }
 }

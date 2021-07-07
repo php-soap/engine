@@ -7,12 +7,12 @@ namespace SoapTest\Engine\HttpBinding;
 use PHPUnit\Framework\TestCase;
 use Soap\Engine\HttpBinding\SoapResponse;
 
-class SoapResponseTest extends TestCase
+final class SoapResponseTest extends TestCase
 {
-    public function testResponse()
+    public function test_response()
     {
         $request = new SoapResponse('response');
 
-        self::assertSame('response', $request->getPayload());
+        static::assertSame('response', $request->getPayload());
     }
 }

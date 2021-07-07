@@ -12,13 +12,16 @@ use Soap\Engine\Metadata\Model\Parameter;
 /**
  * @implements IteratorAggregate<Parameter>
  */
-final class ParameterCollection implements IteratorAggregate, Countable
+final class ParameterCollection implements Countable, IteratorAggregate
 {
     /**
-     * @var Parameter[]
+     * @var list<Parameter>
      */
     private array $parameters;
 
+    /**
+     * @no-named-arguments
+     */
     public function __construct(Parameter ...$parameters)
     {
         $this->parameters = $parameters;
