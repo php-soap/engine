@@ -10,10 +10,13 @@ use IteratorAggregate;
 use Soap\Engine\Exception\MetadataException;
 use Soap\Engine\Metadata\Model\Type;
 
+/**
+ * @implements IteratorAggregate<Type>
+ */
 final class TypeCollection implements IteratorAggregate, Countable
 {
     /**
-     * @var Type[]
+     * @var list<Type>
      */
     private array $types;
 
@@ -22,9 +25,6 @@ final class TypeCollection implements IteratorAggregate, Countable
         $this->types = $types;
     }
 
-    /**
-     * @return ArrayIterator|Type[]
-     */
     public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->types);
@@ -35,11 +35,19 @@ final class TypeCollection implements IteratorAggregate, Countable
         return count($this->types);
     }
 
+    /**
+     * @template T
+     * @param callable(Type): T $callback
+     * @return array<T>
+     */
     public function map(callable $callback): array
     {
         return array_map($callback, $this->types);
     }
 
+    /**
+     * @param callable(Type): bool $filter
+     */
     public function filter(callable $filter): self
     {
         return new self(...array_filter(
@@ -48,7 +56,16 @@ final class TypeCollection implements IteratorAggregate, Countable
         ));
     }
 
-    public function reduce(callable $reducer, $initial = null)
+    /**
+     * @psalm-suppress MixedReturnStatement
+     * @psalm-suppress MixedInferredReturnType
+     *
+     * @template T
+     * @param callable(T, Type): T $reducer
+     * @param T $initial
+     * @return T
+     */
+    public function reduce(callable $reducer, mixed $initial)
     {
         return array_reduce(
             $this->types,
@@ -57,6 +74,9 @@ final class TypeCollection implements IteratorAggregate, Countable
         );
     }
 
+    /**
+     * @throws MetadataException
+     */
     public function fetchFirstByName(string $name): Type
     {
         foreach ($this->types as $type) {

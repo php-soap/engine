@@ -31,6 +31,9 @@ final class XsdType
            ->withBaseType(self::convertBaseType($name, ''));
     }
 
+    /**
+     * @return array<string, string>
+     */
     public static function fetchAllKnownBaseTypeMappings(): array
     {
         return [

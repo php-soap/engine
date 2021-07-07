@@ -10,6 +10,9 @@ use IteratorAggregate;
 use Soap\Engine\Exception\MetadataException;
 use Soap\Engine\Metadata\Model\Method;
 
+/**
+ * @implements IteratorAggregate<Method>
+ */
 final class MethodCollection implements IteratorAggregate, Countable
 {
     /**
@@ -37,6 +40,9 @@ final class MethodCollection implements IteratorAggregate, Countable
         return array_map($callback, $this->methods);
     }
 
+    /**
+     * @throws MetadataException
+     */
     public function fetchByName(string $name): Method
     {
         foreach ($this->methods as $method) {

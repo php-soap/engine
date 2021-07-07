@@ -9,6 +9,9 @@ use Countable;
 use IteratorAggregate;
 use Soap\Engine\Metadata\Model\Parameter;
 
+/**
+ * @implements IteratorAggregate<Parameter>
+ */
 final class ParameterCollection implements IteratorAggregate, Countable
 {
     /**
@@ -21,9 +24,6 @@ final class ParameterCollection implements IteratorAggregate, Countable
         $this->parameters = $parameters;
     }
 
-    /**
-     * @return ArrayIterator|Parameter[]
-     */
     public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->parameters);

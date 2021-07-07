@@ -9,6 +9,9 @@ use Countable;
 use IteratorAggregate;
 use Soap\Engine\Metadata\Model\Property;
 
+/**
+ * @implements IteratorAggregate<Property>
+ */
 final class PropertyCollection implements IteratorAggregate, Countable
 {
     /**
@@ -21,9 +24,6 @@ final class PropertyCollection implements IteratorAggregate, Countable
         $this->properties = $properties;
     }
 
-    /**
-     * @return ArrayIterator|Property[]
-     */
     public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->properties);

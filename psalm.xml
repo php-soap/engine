@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<psalm
+    errorLevel="1"
+    resolveFromConfigFile="true"
+    forbidEcho="true"
+    strictBinaryOperands="true"
+    phpVersion="8.0"
+    allowPhpStormGenerics="true"
+    allowStringToStandInForClass="true"
+    rememberPropertyAssignmentsAfterCall="false"
+    skipChecksOnUnresolvableIncludes="false"
+    checkForThrowsDocblock="true"
+    checkForThrowsInGlobalScope="true"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+    <projectFiles>
+        <directory name="src" />
+        <ignoreFiles>
+            <directory name="vendor" />
+            <directory name="tests" />
+        </ignoreFiles>
+    </projectFiles>
+    <issueHandlers>
+        <MissingConstructor>
+            <errorLevel type="suppress">
+                <directory name="tests"/>
+            </errorLevel>
+        </MissingConstructor>
+        <UndefinedClass>
+            <errorLevel type="suppress">
+                <directory name="tests"/>
+            </errorLevel>
+        </UndefinedClass>
+    </issueHandlers>
+</psalm>

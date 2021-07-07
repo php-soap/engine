@@ -9,6 +9,9 @@ use Countable;
 use IteratorAggregate;
 use Soap\Engine\Metadata\Model\XsdType;
 
+/**
+ * @implements IteratorAggregate<XsdType>
+ */
 final class XsdTypeCollection implements IteratorAggregate, Countable
 {
     /**
