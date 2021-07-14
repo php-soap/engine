@@ -63,6 +63,10 @@ $engine = new LazyEngine(fn () => new SimpleEngine($driver, $transport));
   * **Psr18Transport**: Uses a PSR-18 HTTP client to handle SOAP requests.
   * Provides middleware to deal with some common SOAP quirks.
 
+
+* [async-transport](https://github.com/php-soap/async-transport/): Combines `ext-fiber` and your async PSR-18 HTTP client to deal with the HTTP Layer.
+  * **AsyncTransport**: Uses an async HTTP client to handle SOAP requests.
+
 ## Creating your own engine
 
 Every component of the engine has its own interface.
