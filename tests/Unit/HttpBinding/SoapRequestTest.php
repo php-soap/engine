@@ -11,12 +11,12 @@ final class SoapRequestTest extends TestCase
 {
     public function test_request()
     {
-        $request = new SoapRequest('requestbody', 'location', 'action', SoapRequest::SOAP_1_1, 0);
+        $request = new SoapRequest('requestbody', 'location', 'action', SoapRequest::SOAP_1_1, false);
 
         static::assertSame('requestbody', $request->getRequest());
         static::assertSame('location', $request->getLocation());
         static::assertSame('action', $request->getAction());
         static::assertSame(SoapRequest::SOAP_1_1, $request->getVersion());
-        static::assertSame(0, $request->getOneWay());
+        static::assertSame(false, $request->getOneWay());
     }
 }
