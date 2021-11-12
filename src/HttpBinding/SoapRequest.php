@@ -11,9 +11,9 @@ final class SoapRequest
     private string $location;
     private string $action;
     private int $version;
-    private int $oneWay;
+    private bool $oneWay;
 
-    public function __construct(string $request, string $location, string $action, int $version, int $oneWay = 0)
+    public function __construct(string $request, string $location, string $action, int $version, bool $oneWay = false)
     {
         $this->request = $request;
         $this->location = $location;
@@ -52,7 +52,7 @@ final class SoapRequest
         return $this->getVersion() === self::SOAP_1_2;
     }
 
-    public function getOneWay(): int
+    public function getOneWay(): bool
     {
         return $this->oneWay;
     }
