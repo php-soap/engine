@@ -28,7 +28,7 @@ final class XsdTypeCollection implements Countable, IteratorAggregate
     }
 
     /**
-     * @return ArrayIterator|XsdType[]
+     * @return ArrayIterator<array-key, XsdType>
      */
     public function getIterator(): ArrayIterator
     {
