@@ -12,12 +12,13 @@ final class XsdType
     private string $xmlNamespace = '';
     private string $xmlNamespaceName = '';
 
-    private array $meta = [];
+    private TypeMeta $meta;
     private array $memberTypes = [];
 
     public function __construct(string $name)
     {
         $this->name = $name;
+        $this->meta = new TypeMeta();
     }
 
     public static function create(string $name): self
@@ -38,6 +39,7 @@ final class XsdType
     {
         return [
             'anyuri' => 'string',
+            'anyxml' => 'string',
             'base64binary' => 'string',
             'byte' => 'integer',
             'decimal' => 'float',
@@ -75,7 +77,7 @@ final class XsdType
             'time' => 'string',
             'timeinstant' => 'string',
             'token' => 'string',
-            'unknown' => 'anyType',
+            'unknown' => 'mixed',
             'unsignedbyte' => 'integer',
             'unsignedint' => 'integer',
             'unsignedlong' => 'integer',
@@ -149,15 +151,18 @@ final class XsdType
         return $new;
     }
 
-    public function withMeta(array $meta): self
+    /**
+     * @param callable(TypeMeta): TypeMeta $metaProvider
+     */
+    public function withMeta(callable $metaProvider): self
     {
         $new = clone $this;
-        $new->meta = $meta;
+        $new->meta = $metaProvider($this->meta);
 
         return $new;
     }
 
-    public function getMeta(): array
+    public function getMeta(): TypeMeta
     {
         return $this->meta;
     }

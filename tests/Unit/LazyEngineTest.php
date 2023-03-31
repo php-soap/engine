@@ -10,8 +10,8 @@ use Soap\Engine\LazyEngine;
 use Soap\Engine\Metadata\Metadata;
 use Soap\Engine\SimpleEngine;
 use Soap\Engine\Transport;
+use SoapTest\Engine\Fixtures\DummyInMemoryMetadata;
 use SoapTest\Engine\Fixtures\DummyTransport;
-use SoapTest\Engine\Fixtures\InmemoryMetadata;
 use SoapTest\Engine\Fixtures\PassThroughDriver;
 
 final class LazyEngineTest extends TestCase
@@ -22,7 +22,7 @@ final class LazyEngineTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->metadata = new InmemoryMetadata();
+        $this->metadata = new DummyInMemoryMetadata();
         $this->transport = new DummyTransport('response');
 
         $this->engine = new LazyEngine(

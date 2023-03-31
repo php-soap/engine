@@ -10,7 +10,7 @@ use IteratorAggregate;
 use Soap\Engine\Metadata\Model\Parameter;
 
 /**
- * @implements IteratorAggregate<Parameter>
+ * @implements IteratorAggregate<int<0,max>, Parameter>
  */
 final class ParameterCollection implements Countable, IteratorAggregate
 {
@@ -27,6 +27,9 @@ final class ParameterCollection implements Countable, IteratorAggregate
         $this->parameters = $parameters;
     }
 
+    /**
+     * @return ArrayIterator<int<0,max>, Parameter>
+     */
     public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->parameters);
@@ -37,7 +40,12 @@ final class ParameterCollection implements Countable, IteratorAggregate
         return count($this->parameters);
     }
 
-    public function map(callable  $callback): array
+    /**
+     * @template T
+     * @param callable(Parameter): T $callback
+     * @return list<T>
+     */
+    public function map(callable $callback): array
     {
         return array_map($callback, $this->parameters);
     }

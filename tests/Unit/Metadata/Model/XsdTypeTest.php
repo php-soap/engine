@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace SoapTest\Engine\Metadata\Model;
 
 use PHPUnit\Framework\TestCase;
+use Soap\Engine\Metadata\Model\TypeMeta;
 use Soap\Engine\Metadata\Model\XsdType;
 
 final class XsdTypeTest extends TestCase
@@ -21,7 +22,7 @@ final class XsdTypeTest extends TestCase
         static::assertSame([], $type->getMemberTypes());
     }
 
-    
+
     public function test_it_cannot_guess_unknown_types()
     {
         $type = XsdType::guess('myType');
@@ -29,7 +30,7 @@ final class XsdTypeTest extends TestCase
         static::assertSame('', $type->getBaseType());
     }
 
-    
+
     public function test_it_can_guess_known_types()
     {
         foreach (XsdType::fetchAllKnownBaseTypeMappings() as $typeName => $baseType) {
@@ -39,7 +40,7 @@ final class XsdTypeTest extends TestCase
         }
     }
 
-    
+
     public function test_it_can_add_base_type()
     {
         $type = XsdType::create('myType')->withBaseType('baseType');
@@ -49,7 +50,7 @@ final class XsdTypeTest extends TestCase
         static::assertSame('baseType', $type->getBaseTypeOrFallbackToName());
     }
 
-    
+
     public function test_it_can_add_known_base_type_and_move_actual_type_to_member_types()
     {
         foreach (XsdType::fetchAllKnownBaseTypeMappings() as $typeName => $baseType) {
@@ -62,7 +63,7 @@ final class XsdTypeTest extends TestCase
         }
     }
 
-    
+
     public function test_it_can_add_member_types()
     {
         $new = XsdType::create('myType')->withMemberTypes($types = ['type1', 'type2']);
@@ -71,7 +72,7 @@ final class XsdTypeTest extends TestCase
         static::assertSame($types, $new->getMemberTypes());
     }
 
-    
+
     public function test_it_can_add_xml_namespace()
     {
         $new = XsdType::create('myType')->withXmlNamespace($namespace = 'http://www.w3.org/2001/XMLSchema');
@@ -80,7 +81,7 @@ final class XsdTypeTest extends TestCase
         static::assertSame($namespace, $new->getXmlNamespace());
     }
 
-    
+
     public function test_it_can_add_xml_namespace_name()
     {
         $new = XsdType::create('myType')->withXmlNamespaceName($namespace = 'hello');
@@ -89,16 +90,20 @@ final class XsdTypeTest extends TestCase
         static::assertSame('hello', $new->getXmlNamespaceName());
     }
 
-    
+
     public function test_it_can_add_meta()
     {
-        $new = XsdType::create('myType')->withMeta($meta = ['minOccurs' => 1]);
+        $type = XsdType::create('myType');
+        $new = $type->withMeta(
+            static fn (TypeMeta $meta): TypeMeta => $meta->withMinOccurs(1)
+        );
 
         static::assertSame('myType', $new->getName());
-        static::assertSame($meta, $new->getMeta());
+        static::assertNotSame($type->getMeta(), $new->getMeta());
+        static::assertSame(1, $new->getMeta()->minOccurs()->unwrapOr(0));
     }
 
-    
+
     public function test_it_can_return_name_as_string()
     {
         $new = XsdType::create('myType');
