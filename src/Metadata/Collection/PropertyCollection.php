@@ -10,7 +10,7 @@ use IteratorAggregate;
 use Soap\Engine\Metadata\Model\Property;
 
 /**
- * @implements IteratorAggregate<Property>
+ * @implements IteratorAggregate<int<0,max>, Property>
  */
 final class PropertyCollection implements Countable, IteratorAggregate
 {
@@ -27,6 +27,9 @@ final class PropertyCollection implements Countable, IteratorAggregate
         $this->properties = $properties;
     }
 
+    /**
+     * @return ArrayIterator<int<0,max>, Property>
+     */
     public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->properties);
@@ -37,6 +40,11 @@ final class PropertyCollection implements Countable, IteratorAggregate
         return count($this->properties);
     }
 
+    /**
+     * @template T
+     * @param callable(Property): T $callback
+     * @return list<T>
+     */
     public function map(callable  $callback): array
     {
         return array_map($callback, $this->properties);

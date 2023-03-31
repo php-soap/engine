@@ -11,7 +11,7 @@ use Soap\Engine\Exception\MetadataException;
 use Soap\Engine\Metadata\Model\Type;
 
 /**
- * @implements IteratorAggregate<Type>
+ * @implements IteratorAggregate<int<0,max>, Type>
  */
 final class TypeCollection implements Countable, IteratorAggregate
 {
@@ -28,6 +28,9 @@ final class TypeCollection implements Countable, IteratorAggregate
         $this->types = $types;
     }
 
+    /**
+     * @return ArrayIterator<int<0,max>, Type>
+     */
     public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->types);

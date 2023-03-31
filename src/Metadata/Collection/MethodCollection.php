@@ -11,7 +11,7 @@ use Soap\Engine\Exception\MetadataException;
 use Soap\Engine\Metadata\Model\Method;
 
 /**
- * @implements IteratorAggregate<Method>
+ * @implements IteratorAggregate<int<0,max>, Method>
  */
 final class MethodCollection implements Countable, IteratorAggregate
 {
@@ -28,6 +28,9 @@ final class MethodCollection implements Countable, IteratorAggregate
         $this->methods = $methods;
     }
 
+    /**
+     * @return ArrayIterator<int<0,max>, Method>
+     */
     public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->methods);
@@ -38,7 +41,12 @@ final class MethodCollection implements Countable, IteratorAggregate
         return count($this->methods);
     }
 
-    public function map(callable  $callback): array
+    /**
+     * @template T
+     * @param callable(Method): T $callback
+     * @return list<T>
+     */
+    public function map(callable $callback): array
     {
         return array_map($callback, $this->methods);
     }

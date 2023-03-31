@@ -10,7 +10,7 @@ use IteratorAggregate;
 use Soap\Engine\Metadata\Model\XsdType;
 
 /**
- * @implements IteratorAggregate<XsdType>
+ * @implements IteratorAggregate<int<0,max>, XsdType>
  */
 final class XsdTypeCollection implements Countable, IteratorAggregate
 {
@@ -28,7 +28,7 @@ final class XsdTypeCollection implements Countable, IteratorAggregate
     }
 
     /**
-     * @return ArrayIterator<array-key, XsdType>
+     * @return ArrayIterator<int<0,max>, XsdType>
      */
     public function getIterator(): ArrayIterator
     {
@@ -40,6 +40,11 @@ final class XsdTypeCollection implements Countable, IteratorAggregate
         return count($this->types);
     }
 
+    /**
+     * @template T
+     * @param callable(XsdType): T $callback
+     * @return list<T>
+     */
     public function map(callable  $callback): array
     {
         return array_map($callback, $this->types);

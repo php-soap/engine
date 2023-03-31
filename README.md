@@ -68,12 +68,12 @@ $engine = new LazyEngine(fn () => new SimpleEngine($driver, $transport));
     
 
 * [psr18-transport](https://github.com/php-soap/psr18-transport/): Leverages your PSR-18 HTTP client to deal with the HTTP Layer.
-  * **Psr18Transport**: Uses a PSR-18 HTTP client to handle SOAP requests.
+  * **Psr18Transport**: Uses a PSR-18 HTTP client to handle SOAP requests. You can also use fiber-based Async clients!
   * Provides middleware to deal with some common SOAP quirks.
 
 
-* [async-transport](https://github.com/php-soap/async-transport/): Combines `ext-fiber` and your async PSR-18 HTTP client to deal with the HTTP Layer.
-  * **AsyncTransport**: Uses an async HTTP client to handle SOAP requests.
+* [wsdl-reader](https://github.com/php-soap/wsdl-reader/): Provides an XML based PHP implementation for collecting WSDL meta-data.
+  * **Wsdl1MetadataProvider**: Provides the methods and types from any WSDL 1 document.
 
 ## Creating your own engine
 
