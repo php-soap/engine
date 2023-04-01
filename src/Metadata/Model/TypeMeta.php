@@ -56,6 +56,8 @@ final class TypeMeta
     private $isAttribute;
 
     /**
+     * Indicates the element value of an attribute-group.
+     *
      * @var bool|null
      */
     private $isElementValue;
@@ -69,6 +71,11 @@ final class TypeMeta
      * @var bool|null
      */
     private $isNullable;
+
+    /**
+     * @var bool|null
+     */
+    private $isElement;
 
     /**
      * @var bool|null
@@ -314,6 +321,22 @@ final class TypeMeta
     {
         $new = clone $this;
         $new->isSimple = $isSimple;
+
+        return $new;
+    }
+
+    /**
+     * @return Option<bool>
+     */
+    public function isElement(): Option
+    {
+        return from_nullable($this->isElement);
+    }
+
+    public function withIsElement(?bool $isElement): self
+    {
+        $new = clone $this;
+        $new->isElement = $isElement;
 
         return $new;
     }

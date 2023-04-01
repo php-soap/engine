@@ -95,6 +95,13 @@ final class TypeMetaTest extends TestCase
         static::assertSame($value, $meta->isSimple()->unwrapOr(null));
     }
 
+    public function test_it_has_is_element()
+    {
+        $value = true;
+        $meta = (new TypeMeta())->withIsElement($value);
+        static::assertSame($value, $meta->isElement()->unwrapOr(null));
+    }
+
     public function test_it_has_is_local()
     {
         $value = true;

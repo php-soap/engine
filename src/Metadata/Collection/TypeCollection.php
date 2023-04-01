@@ -93,4 +93,18 @@ final class TypeCollection implements Countable, IteratorAggregate
 
         throw MetadataException::typeNotFound($name);
     }
+
+    /**
+     * @throws MetadataException
+     */
+    public function fetchByNameAndXmlNamespace(string $name, string $namespace): Type
+    {
+        foreach ($this->types as $type) {
+            if ($name === $type->getName() && $namespace === $type->getXsdType()->getXmlNamespace()) {
+                return $type;
+            }
+        }
+
+        throw MetadataException::typeNotFound($name);
+    }
 }
