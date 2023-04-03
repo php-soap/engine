@@ -55,6 +55,32 @@ use Soap\Engine\LazyEngine;
 $engine = new LazyEngine(fn () => new SimpleEngine($driver, $transport));
 ```
 
+## Drivers
+
+This package provides drivers that can be used in a generic way:
+
+### SimpleDriver
+
+The SimpleEngine is a wrapper around a previous defined `Encoder`, `Decoder` and a `Metadata` implementation.
+
+```php
+use Soap\Engine\SimpleDriver;
+
+$engine = new SimpleDriver($encoder, $decoder, $metadata);
+```
+
+### PartialDriver
+
+The PartialDriver is a wrapper around a previous defined `Encoder`, `Decoder` and a `Metadata` implementation.
+It is possible to only provide one of the required items. 
+When some of the implementations are missing, it will throw a `DriverException` when the driver's method is invoked.
+
+```php
+use Soap\Engine\PartialDriver;
+
+$engine = new PartialDriver(metadata: $metadata);
+```
+
 ## List of available components:
 
 * [ext-soap-engine](https://github.com/php-soap/ext-soap-engine): An engine based on PHP's ext-soap.
