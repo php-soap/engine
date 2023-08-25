@@ -36,7 +36,7 @@ final class TypeMeta
     private $enums;
 
     /**
-     * @var array{type: non-empty-string, namespace: non-empty-string}|null
+     * @var array{type: non-empty-string, namespace: non-empty-string, isSimple ?: bool}|null
      */
     private $extends;
 
@@ -190,7 +190,7 @@ final class TypeMeta
     }
 
     /**
-     * @return Option<array{type: non-empty-string, namespace: non-empty-string}>
+     * @return Option<array{type: non-empty-string, namespace: non-empty-string, isSimple ?: bool}>
      */
     public function extends(): Option
     {
@@ -207,6 +207,7 @@ final class TypeMeta
             shape([
                 'type' => non_empty_string(),
                 'namespace' => non_empty_string(),
+                'isSimple' => optional(bool()),
             ], true)
         )->coerce($extends);
 
