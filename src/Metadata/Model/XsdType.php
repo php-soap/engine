@@ -6,11 +6,54 @@ namespace Soap\Engine\Metadata\Model;
 
 final class XsdType
 {
+    /**
+     * The name of the current type.
+     */
     private string $name;
+
+    /**
+     * The expected PHP base type.
+     */
     private string $baseType = '';
 
+    /**
+     * The XML namespace of the linked XML type=""
+     * For example : a string element can be in a specific tns: <tns:x>stringValue</tns:x>
+     * But it is still a string (in xsd namespace)
+     */
     private string $xmlNamespace = '';
+
+    /**
+     * The XML namespace name of the linked XML type=""
+     * For example : a string element can be in a specific tns: <tns:x>stringValue</tns:x>
+     * But it is still a string (in xsd namespace)
+     */
     private string $xmlNamespaceName = '';
+
+    /**
+     * The name of the linked XML type=""
+     * For example: <element name="X" type="anyType" /> --> anyType
+     */
+    private string $xmlTypeName = '';
+
+    /**
+     * The name="" of the type. (Same as Type::name)
+     * For example: <element name="X" type="anyType" />
+     * The target node name would be X
+     */
+    private string $xmlTargetNodeName = '';
+
+    /**
+     * Contains the wrapping XML target namespace.
+     * For example : a string element can be in a specific tns: <tns:x>stringValue</tns:x>
+     */
+    private string $xmlTargetNamespace = '';
+
+    /**
+     * Contains the wrapping XML target namespace name.
+     * For example : a string element can be in a specific tns: <tns:x>stringValue</tns:x>
+     */
+    private string $xmlTargetNamespaceName = '';
 
     private TypeMeta $meta;
     private array $memberTypes = [];
@@ -29,7 +72,7 @@ final class XsdType
     public static function guess(string $name): self
     {
         return self::create($name)
-           ->withBaseType(self::convertBaseType($name, ''));
+            ->withBaseType(self::convertBaseType($name, ''));
     }
 
     /**
@@ -118,6 +161,26 @@ final class XsdType
         return $this->xmlNamespaceName;
     }
 
+    public function getXmlTargetNamespace(): string
+    {
+        return $this->xmlTargetNamespace;
+    }
+
+    public function getXmlTargetNamespaceName(): string
+    {
+        return $this->xmlTargetNamespaceName;
+    }
+
+    public function getXmlTypeName(): string
+    {
+        return $this->xmlTypeName;
+    }
+
+    public function getXmlTargetNodeName(): string
+    {
+        return $this->xmlTargetNodeName;
+    }
+
     public function withXmlNamespace(string $xmlNamespace): self
     {
         $new = clone $this;
@@ -130,6 +193,38 @@ final class XsdType
     {
         $new = clone $this;
         $new->xmlNamespaceName = $xmlNamespaceName;
+
+        return $new;
+    }
+
+    public function withXmlTargetNamespace(string $xmlTargetNamespace): self
+    {
+        $new = clone $this;
+        $new->xmlTargetNamespace = $xmlTargetNamespace;
+
+        return $new;
+    }
+
+    public function withXmlTargetNamespaceName(string $xmlTargetNamespaceName): self
+    {
+        $new = clone $this;
+        $new->xmlTargetNamespaceName = $xmlTargetNamespaceName;
+
+        return $new;
+    }
+
+    public function withXmlTargetNodeName(string $xmlTargetNodeName): self
+    {
+        $new = clone $this;
+        $new->xmlTargetNodeName = $xmlTargetNodeName;
+
+        return $new;
+    }
+
+    public function withXmlTypeName(string $xmlTypeName): self
+    {
+        $new = clone $this;
+        $new->xmlTypeName = $xmlTypeName;
 
         return $new;
     }
