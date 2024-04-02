@@ -11,6 +11,7 @@ use function Psl\Type\mixed_dict;
 use function Psl\Type\non_empty_string;
 use function Psl\Type\optional;
 use function Psl\Type\shape;
+use function Psl\Type\string;
 use function Psl\Type\vec;
 
 final class TypeMeta
@@ -31,7 +32,7 @@ final class TypeMeta
     private $docs;
 
     /**
-     * @var list<non-empty-string>|null
+     * @var list<string>|null
      */
     private $enums;
 
@@ -171,7 +172,7 @@ final class TypeMeta
     }
 
     /**
-     * @return Option<list<non-empty-string>>
+     * @return Option<list<string>>
      */
     public function enums(): Option
     {
@@ -184,7 +185,7 @@ final class TypeMeta
     public function withEnums(?array $enums): self
     {
         $new = clone $this;
-        $new->enums = optional(vec(non_empty_string()))->coerce($enums);
+        $new->enums = optional(vec(string()))->coerce($enums);
 
         return $new;
     }
