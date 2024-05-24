@@ -21,7 +21,17 @@ final class MethodMeta
     /**
      * @var string|null
      */
+    private $operationName;
+
+    /**
+     * @var string|null
+     */
     private $location;
+
+    /**
+     * @var string|null
+     */
+    private $targetNamespace;
 
     /**
      * @var string|null
@@ -46,7 +56,27 @@ final class MethodMeta
     /**
      * @var string|null
      */
+    private $inputNamespace;
+
+    /**
+     * @var string|null
+     */
+    private $inputEncodingStyle;
+
+    /**
+     * @var string|null
+     */
     private $outputBindingUsage;
+
+    /**
+     * @var string|null
+     */
+    private $outputNamespace;
+
+    /**
+     * @var string|null
+     */
+    private $outputEncodingStyle;
 
     /**
      * @var bool|null
@@ -88,6 +118,22 @@ final class MethodMeta
     /**
      * @return Option<string>
      */
+    public function operationName(): Option
+    {
+        return from_nullable($this->operationName);
+    }
+
+    public function withOperationName(?string $operationName): self
+    {
+        $new = clone $this;
+        $new->operationName = $operationName;
+
+        return $new;
+    }
+
+    /**
+     * @return Option<string>
+     */
     public function location(): Option
     {
         return from_nullable($this->location);
@@ -97,6 +143,22 @@ final class MethodMeta
     {
         $new = clone $this;
         $new->location = $location;
+
+        return $new;
+    }
+
+    /**
+     * @return Option<string>
+     */
+    public function targetNamespace(): Option
+    {
+        return from_nullable($this->targetNamespace);
+    }
+
+    public function withTargetNamespace(?string $targetNamespace): self
+    {
+        $new = clone $this;
+        $new->targetNamespace = $targetNamespace;
 
         return $new;
     }
@@ -184,6 +246,39 @@ final class MethodMeta
     /**
      * @return Option<string>
      */
+    public function inputNamespace(): Option
+    {
+        return from_nullable($this->inputNamespace);
+    }
+
+    public function withInputNamespace(?string $inputNamespace): self
+    {
+        $new = clone $this;
+        $new->inputNamespace = $inputNamespace;
+
+        return $new;
+    }
+
+    /**
+     * @return Option<string>
+     */
+    public function inputEncodingStyle(): Option
+    {
+        return from_nullable($this->inputEncodingStyle);
+    }
+
+    public function withInputEncodingStyle(?string $inputEncodingStyle): self
+    {
+        $new = clone $this;
+        $new->inputEncodingStyle = $inputEncodingStyle;
+
+        return $new;
+    }
+
+
+    /**
+     * @return Option<string>
+     */
     public function outputBindingUsage(): Option
     {
         return from_nullable($this->outputBindingUsage);
@@ -193,6 +288,38 @@ final class MethodMeta
     {
         $new = clone $this;
         $new->outputBindingUsage = $outputBindingUsage;
+
+        return $new;
+    }
+
+    /**
+     * @return Option<string>
+     */
+    public function outputNamespace(): Option
+    {
+        return from_nullable($this->outputNamespace);
+    }
+
+    public function withOutputNamespace(?string $outputNamespace): self
+    {
+        $new = clone $this;
+        $new->outputNamespace = $outputNamespace;
+
+        return $new;
+    }
+
+    /**
+     * @return Option<string>
+     */
+    public function outputEncodingStyle(): Option
+    {
+        return from_nullable($this->outputEncodingStyle);
+    }
+
+    public function withOutputEncodingStyle(?string $outputEncodingStyle): self
+    {
+        $new = clone $this;
+        $new->outputEncodingStyle = $outputEncodingStyle;
 
         return $new;
     }
