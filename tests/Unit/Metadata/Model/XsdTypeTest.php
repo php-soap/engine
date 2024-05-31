@@ -59,7 +59,7 @@ final class XsdTypeTest extends TestCase
             static::assertSame('myType', $new->getName());
             static::assertSame($baseType, $new->getBaseType());
             static::assertSame($baseType, $new->getBaseTypeOrFallbackToName());
-            static::assertSame([$typeName], $new->getMemberTypes());
+            static::assertSame($typeName === $baseType ? [] : [$typeName], $new->getMemberTypes());
         }
     }
 

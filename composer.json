@@ -16,7 +16,8 @@
     ],
     "require": {
         "php": "~8.1.0 || ~8.2.0 || ~8.3.0",
-        "azjezz/psl": "^2.5"
+        "azjezz/psl": "^2.5",
+        "php-soap/xml": "^1.6.0"
     },
     "autoload-dev": {
         "psr-4": {
