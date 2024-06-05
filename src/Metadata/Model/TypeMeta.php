@@ -71,6 +71,11 @@ final class TypeMeta
     /**
      * @var bool|null
      */
+    private $isRepeatingElement;
+
+    /**
+     * @var bool|null
+     */
     private $isNullable;
 
     /**
@@ -122,6 +127,20 @@ final class TypeMeta
      * @var bool|null
      */
     private $isQualified;
+
+    /**
+     * The soap-enc array-type information
+     *
+     * @var array{type: non-empty-string, itemType: non-empty-string, namespace: non-empty-string}|null
+     */
+    private $arrayType;
+
+    /**
+     * The name of the internal array nodes for soap-enc arrays
+     *
+     * @var string|null
+     */
+    private $arrayNodeName;
 
     /**
      * @return Option<bool>
@@ -291,6 +310,22 @@ final class TypeMeta
     {
         $new = clone $this;
         $new->isList = $isList;
+
+        return $new;
+    }
+
+    /**
+     * @return Option<bool>
+     */
+    public function isRepeatingElement(): Option
+    {
+        return from_nullable($this->isRepeatingElement);
+    }
+
+    public function withIsRepeatingElement(?bool $isRepeatingElement): self
+    {
+        $new = clone $this;
+        $new->isRepeatingElement = $isRepeatingElement;
 
         return $new;
     }
@@ -481,6 +516,47 @@ final class TypeMeta
     {
         $new = clone $this;
         $new->isQualified = $qualified;
+
+        return $new;
+    }
+
+    /**
+     * @return Option<array{type: non-empty-string, itemType: non-empty-string, namespace: non-empty-string}>
+     */
+    public function arrayType(): Option
+    {
+        return from_nullable($this->arrayType);
+    }
+
+    /**
+     * @throws CoercionException
+     */
+    public function withArrayType(?array $arrayType): self
+    {
+        $new = clone $this;
+        $new->arrayType = optional(
+            shape([
+                'type' => non_empty_string(),
+                'itemType' => non_empty_string(),
+                'namespace' => non_empty_string(),
+            ], true)
+        )->coerce($arrayType);
+
+        return $new;
+    }
+
+    /**
+     * @return Option<string>
+     */
+    public function arrayNodeName(): Option
+    {
+        return from_nullable($this->arrayNodeName);
+    }
+
+    public function withArrayNodeName(?string $arrayNodeName): self
+    {
+        $new = clone $this;
+        $new->arrayNodeName = $arrayNodeName;
 
         return $new;
     }

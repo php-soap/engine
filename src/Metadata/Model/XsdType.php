@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Soap\Engine\Metadata\Model;
 
+use Soap\Xml\Xmlns;
+
 final class XsdType
 {
     /**
@@ -75,6 +77,19 @@ final class XsdType
             ->withBaseType(self::convertBaseType($name, ''));
     }
 
+    public static function any(): self
+    {
+        return self::guess('anyType')
+            ->withXmlTypeName('anyType')
+            ->withXmlNamespace(Xmlns::xsd()->value())
+            ->withMeta(
+                static fn (TypeMeta $meta): TypeMeta => $meta
+                    ->withIsSimple(true)
+                    ->withIsNullable(true)
+                    ->withIsNil(true)
+            );
+    }
+
     /**
      * @return array<string, string>
      */
@@ -86,6 +101,7 @@ final class XsdType
             'anyuri' => 'string',
             'anyxml' => 'string',
             'anysimpletype' => 'mixed',
+            'array' => 'array',
             'base64binary' => 'string',
             'byte' => 'integer',
             'decimal' => 'float',
