@@ -83,6 +83,10 @@ $engine = new PartialDriver(metadata: $metadata);
 
 ## List of available components:
 
+* [cached-engine](https://github.com/php-soap/cached-engine/): Provides wrappers for storing engines and encoders in a PSR-6 Cache pool.
+  * **CachedDriver**: Decorates a cache around a driver factory.
+  * **CachedEngine**: Decorates a cache around an engine factory.
+
 * [ext-soap-engine](https://github.com/php-soap/ext-soap-engine): An engine based on PHP's ext-soap.
   * **ExtSoapEncoder:** Uses PHP's `SoapClient` in order to encode a mixed request body into a SOAP request.
   * **ExtSoapDecoder:** Uses PHP's `SoapClient` in order to decode a SOAP Response into mixed data.
