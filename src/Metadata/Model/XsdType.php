@@ -97,7 +97,6 @@ final class XsdType
             ->withMeta(
                 static fn (TypeMeta $meta): TypeMeta => $meta
                     ->withIsSimple(true)
-                    ->withIsNil(true)
             );
     }
 
