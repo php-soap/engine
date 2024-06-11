@@ -90,6 +90,17 @@ final class XsdType
             );
     }
 
+    public static function void(): self
+    {
+        return self::guess('void')
+            ->withBaseType('mixed')
+            ->withMeta(
+                static fn (TypeMeta $meta): TypeMeta => $meta
+                    ->withIsSimple(true)
+                    ->withIsNil(true)
+            );
+    }
+
     /**
      * @return array<string, string>
      */
@@ -284,6 +295,14 @@ final class XsdType
     public function __toString(): string
     {
         return $this->name;
+    }
+
+    public function copy(string $name): self
+    {
+        $new = clone $this;
+        $new->name = $name;
+
+        return $new;
     }
 
     private static function convertBaseType(string $baseType, string $fallback): string

@@ -137,4 +137,22 @@ final class XsdTypeTest extends TestCase
 
         static::assertSame('myType', (string) $new);
     }
+
+    
+    public function test_it_can_copy_a_type(): void
+    {
+        $type = XsdType::any();
+        $new = $type->copy('new');
+
+        static::assertSame('new', $new->getName());
+        static::assertSame($type->getBaseType(), $new->getBaseType());
+        static::assertSame($type->getMemberTypes(), $new->getMemberTypes());
+        static::assertSame($type->getXmlNamespace(), $new->getXmlNamespace());
+        static::assertSame($type->getXmlNamespaceName(), $new->getXmlNamespaceName());
+        static::assertSame($type->getXmlTargetNamespace(), $new->getXmlTargetNamespace());
+        static::assertSame($type->getXmlTargetNamespaceName(), $new->getXmlTargetNamespaceName());
+        static::assertSame($type->getXmlTargetNodeName(), $new->getXmlTargetNodeName());
+        static::assertSame($type->getXmlTypeName(), $new->getXmlTypeName());
+        static::assertSame($type->getMeta(), $new->getMeta());
+    }
 }
