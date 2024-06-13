@@ -9,6 +9,8 @@ use Countable;
 use IteratorAggregate;
 use Soap\Engine\Exception\MetadataException;
 use Soap\Engine\Metadata\Model\Type;
+use function array_key_exists;
+use function Psl\Dict\reindex;
 
 /**
  * @implements IteratorAggregate<int<0,max>, Type>
@@ -21,11 +23,23 @@ final class TypeCollection implements Countable, IteratorAggregate
     private array $types;
 
     /**
+     * @var array<string, Type>
+     */
+    private array $qualifiedLookup;
+
+    /**
      * @no-named-arguments
      */
     public function __construct(Type ...$types)
     {
         $this->types = $types;
+        $this->qualifiedLookup = reindex(
+            $types,
+            static fn (Type $type): string => self::createLookupKey(
+                $type->getXsdType()->getName(),
+                $type->getXsdType()->getXmlNamespace()
+            )
+        );
     }
 
     /**
@@ -99,12 +113,16 @@ final class TypeCollection implements Countable, IteratorAggregate
      */
     public function fetchByNameAndXmlNamespace(string $name, string $namespace): Type
     {
-        foreach ($this->types as $type) {
-            if ($name === $type->getName() && $namespace === $type->getXsdType()->getXmlNamespace()) {
-                return $type;
-            }
+        $lookupKey = self::createLookupKey($name, $namespace);
+        if (!array_key_exists($lookupKey, $this->qualifiedLookup)) {
+            throw MetadataException::typeNotFound($name);
         }
 
-        throw MetadataException::typeNotFound($name);
+        return $this->qualifiedLookup[$lookupKey];
+    }
+
+    private static function createLookupKey(string $name, string $namespace): string
+    {
+        return $namespace . ':' . $name;
     }
 }
