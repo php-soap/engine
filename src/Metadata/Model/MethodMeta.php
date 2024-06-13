@@ -9,92 +9,113 @@ use function Psl\Option\from_nullable;
 final class MethodMeta
 {
     /**
-     * @var string|null
+     * @var Option<string>
      */
-    private $docs;
+    private Option $docs;
 
     /**
-     * @var string|null
+     * @var Option<string>
      */
-    private $action;
+    private Option $action;
 
     /**
-     * @var string|null
+     * @var Option<string>
      */
-    private $operationName;
+    private Option $operationName;
 
     /**
-     * @var string|null
+     * @var Option<string>
      */
-    private $location;
+    private Option $location;
 
     /**
-     * @var string|null
+     * @var Option<string>
      */
-    private $targetNamespace;
+    private Option $targetNamespace;
 
     /**
-     * @var string|null
+     * @var Option<string>
      */
-    private $soapVersion;
+    private Option $soapVersion;
 
     /**
-     * @var string|null
+     * @var Option<string>
      */
-    private $transport;
+    private Option $transport;
 
     /**
-     * @var string|null
+     * @var Option<string>
      */
-    private $bindingStyle;
+    private Option $bindingStyle;
 
     /**
-     * @var string|null
+     * @var Option<string>
      */
-    private $inputBindingUsage;
+    private Option $inputBindingUsage;
 
     /**
-     * @var string|null
+     * @var Option<string>
      */
-    private $inputNamespace;
+    private Option $inputNamespace;
 
     /**
-     * @var string|null
+     * @var Option<string>
      */
-    private $inputEncodingStyle;
+    private Option $inputEncodingStyle;
 
     /**
-     * @var string|null
+     * @var Option<string>
      */
-    private $outputBindingUsage;
+    private Option $outputBindingUsage;
 
     /**
-     * @var string|null
+     * @var Option<string>
      */
-    private $outputNamespace;
+    private Option $outputNamespace;
 
     /**
-     * @var string|null
+     * @var Option<string>
      */
-    private $outputEncodingStyle;
+    private Option $outputEncodingStyle;
 
     /**
-     * @var bool|null
+     * @var Option<bool>
      */
-    private $isOneWay;
+    private Option $isOneWay;
+
+    public function __construct()
+    {
+        $none = Option::none();
+
+        $this->docs = $none;
+        $this->action = $none;
+        $this->operationName = $none;
+        $this->location = $none;
+        $this->targetNamespace = $none;
+        $this->soapVersion = $none;
+        $this->transport = $none;
+        $this->bindingStyle = $none;
+        $this->isOneWay = $none;
+        $this->inputBindingUsage = $none;
+        $this->inputNamespace = $none;
+        $this->inputEncodingStyle = $none;
+        $this->outputBindingUsage = $none;
+        $this->outputNamespace = $none;
+        $this->outputEncodingStyle = $none;
+    }
 
     /**
      * @return Option<string>
      */
     public function docs(): Option
     {
-        return from_nullable($this->docs);
+        return $this->docs;
     }
 
     public function withDocs(?string $docs): self
     {
         $new = clone $this;
-        $new->docs = $docs;
+        $new->docs = from_nullable($docs);
 
         return $new;
     }
@@ -104,13 +125,13 @@ final class MethodMeta
      */
     public function action(): Option
     {
-        return from_nullable($this->action);
+        return $this->action;
     }
 
     public function withAction(?string $action): self
     {
         $new = clone $this;
-        $new->action = $action;
+        $new->action = from_nullable($action);
 
         return $new;
     }
@@ -120,13 +141,13 @@ final class MethodMeta
      */
     public function operationName(): Option
     {
-        return from_nullable($this->operationName);
+        return $this->operationName;
     }
 
     public function withOperationName(?string $operationName): self
     {
         $new = clone $this;
-        $new->operationName = $operationName;
+        $new->operationName = from_nullable($operationName);
 
         return $new;
     }
@@ -136,13 +157,13 @@ final class MethodMeta
      */
     public function location(): Option
     {
-        return from_nullable($this->location);
+        return $this->location;
     }
 
     public function withlocation(?string $location): self
     {
         $new = clone $this;
-        $new->location = $location;
+        $new->location = from_nullable($location);
 
         return $new;
     }
@@ -152,13 +173,13 @@ final class MethodMeta
      */
     public function targetNamespace(): Option
     {
-        return from_nullable($this->targetNamespace);
+        return $this->targetNamespace;
     }
 
     public function withTargetNamespace(?string $targetNamespace): self
     {
         $new = clone $this;
-        $new->targetNamespace = $targetNamespace;
+        $new->targetNamespace = from_nullable($targetNamespace);
 
         return $new;
     }
@@ -168,13 +189,13 @@ final class MethodMeta
      */
     public function soapVersion(): Option
     {
-        return from_nullable($this->soapVersion);
+        return $this->soapVersion;
     }
 
     public function withSoapVersion(?string $soapVersion): self
     {
         $new = clone $this;
-        $new->soapVersion = $soapVersion;
+        $new->soapVersion = from_nullable($soapVersion);
 
         return $new;
     }
@@ -184,13 +205,13 @@ final class MethodMeta
      */
     public function transport(): Option
     {
-        return from_nullable($this->transport);
+        return $this->transport;
     }
 
     public function withTransport(?string $transport): self
     {
         $new = clone $this;
-        $new->transport = $transport;
+        $new->transport = from_nullable($transport);
 
         return $new;
     }
@@ -200,13 +221,13 @@ final class MethodMeta
      */
     public function bindingStyle(): Option
     {
-        return from_nullable($this->bindingStyle);
+        return $this->bindingStyle;
     }
 
     public function withBindingStyle(?string $bindingStyle): self
     {
         $new = clone $this;
-        $new->bindingStyle = $bindingStyle;
+        $new->bindingStyle = from_nullable($bindingStyle);
 
         return $new;
     }
@@ -216,13 +237,13 @@ final class MethodMeta
      */
     public function isOneWay(): Option
     {
-        return from_nullable($this->isOneWay);
+        return $this->isOneWay;
     }
 
     public function withIsOneWay(?bool $isOneWay): self
     {
         $new = clone $this;
-        $new->isOneWay = $isOneWay;
+        $new->isOneWay = from_nullable($isOneWay);
 
         return $new;
     }
@@ -232,13 +253,13 @@ final class MethodMeta
      */
     public function inputBindingUsage(): Option
     {
-        return from_nullable($this->inputBindingUsage);
+        return $this->inputBindingUsage;
     }
 
     public function withInputBindingUsage(?string $inputBindingUsage): self
     {
         $new = clone $this;
-        $new->inputBindingUsage = $inputBindingUsage;
+        $new->inputBindingUsage = from_nullable($inputBindingUsage);
 
         return $new;
     }
@@ -248,13 +269,13 @@ final class MethodMeta
      */
     public function inputNamespace(): Option
     {
-        return from_nullable($this->inputNamespace);
+        return $this->inputNamespace;
     }
 
     public function withInputNamespace(?string $inputNamespace): self
     {
         $new = clone $this;
-        $new->inputNamespace = $inputNamespace;
+        $new->inputNamespace = from_nullable($inputNamespace);
 
         return $new;
     }
@@ -264,13 +285,13 @@ final class MethodMeta
      */
     public function inputEncodingStyle(): Option
     {
-        return from_nullable($this->inputEncodingStyle);
+        return $this->inputEncodingStyle;
     }
 
     public function withInputEncodingStyle(?string $inputEncodingStyle): self
     {
         $new = clone $this;
-        $new->inputEncodingStyle = $inputEncodingStyle;
+        $new->inputEncodingStyle = from_nullable($inputEncodingStyle);
 
         return $new;
     }
@@ -281,13 +302,13 @@ final class MethodMeta
      */
     public function outputBindingUsage(): Option
     {
-        return from_nullable($this->outputBindingUsage);
+        return $this->outputBindingUsage;
     }
 
     public function withOutputBindingUsage(?string $outputBindingUsage): self
     {
         $new = clone $this;
-        $new->outputBindingUsage = $outputBindingUsage;
+        $new->outputBindingUsage = from_nullable($outputBindingUsage);
 
         return $new;
     }
@@ -297,13 +318,13 @@ final class MethodMeta
      */
     public function outputNamespace(): Option
     {
-        return from_nullable($this->outputNamespace);
+        return $this->outputNamespace;
     }
 
     public function withOutputNamespace(?string $outputNamespace): self
     {
         $new = clone $this;
-        $new->outputNamespace = $outputNamespace;
+        $new->outputNamespace = from_nullable($outputNamespace);
 
         return $new;
     }
@@ -313,13 +334,13 @@ final class MethodMeta
      */
     public function outputEncodingStyle(): Option
     {
-        return from_nullable($this->outputEncodingStyle);
+        return $this->outputEncodingStyle;
     }
 
     public function withOutputEncodingStyle(?string $outputEncodingStyle): self
     {
         $new = clone $this;
-        $new->outputEncodingStyle = $outputEncodingStyle;
+        $new->outputEncodingStyle = from_nullable($outputEncodingStyle);
 
         return $new;
     }

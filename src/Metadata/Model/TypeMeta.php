@@ -17,143 +17,174 @@ use function Psl\Type\vec;
 final class TypeMeta
 {
     /**
-     * @var bool|null
+     * @var Option<bool>
      */
-    private $isAbstract;
+    private Option $isAbstract;
 
     /**
-     * @var string|null|null
+     * @var Option<string>
      */
-    private $default;
+    private Option $default;
 
     /**
-     * @var string|null
+     * @var Option<string>
      */
-    private $docs;
+    private Option $docs;
 
     /**
-     * @var list<string>|null
+     * @var Option<list<string>>
      */
-    private $enums;
+    private Option $enums;
 
     /**
-     * @var array{type: non-empty-string, namespace: non-empty-string, isSimple ?: bool}|null
+     * @var Option<array{type: non-empty-string, namespace: non-empty-string, isSimple ?: bool}>
      */
-    private $extends;
+    private Option $extends;
 
     /**
-     * @var null|string|null
+     * @var Option<string>
      */
-    private $fixed;
+    private Option $fixed;
 
     /**
-     * @var bool|null
+     * @var Option<bool>
      */
-    private $isAlias;
+    private Option $isAlias;
 
     /**
-     * @var bool|null
+     * @var Option<bool>
      */
-    private $isAttribute;
+    private Option $isAttribute;
 
     /**
      * Indicates the element value of an attribute-group.
      *
-     * @var bool|null
+     * @var Option<bool>
      */
-    private $isElementValue;
+    private Option $isElementValue;
 
     /**
-     * @var bool|null
+     * @var Option<bool>
      */
-    private $isList;
+    private Option $isList;
 
     /**
-     * @var bool|null
+     * @var Option<bool>
      */
-    private $isRepeatingElement;
+    private Option $isRepeatingElement;
 
     /**
-     * @var bool|null
+     * @var Option<bool>
      */
-    private $isNullable;
+    private Option $isNullable;
 
     /**
-     * @var bool|null
+     * @var Option<bool>
      */
-    private $isElement;
+    private Option $isElement;
 
     /**
-     * @var bool|null
+     * @var Option<bool>
      */
-    private $isSimple;
+    private Option $isSimple;
 
     /**
-     * @var bool|null
+     * @var Option<bool>
      */
-    private $isLocal;
+    private Option $isLocal;
 
     /**
-     * @var bool|null
+     * @var Option<bool>
      */
-    private $isNil;
+    private Option $isNil;
 
     /**
-     * @var int|null
+     * @var Option<int>
      */
-    private $minOccurs;
+    private Option $minOccurs;
 
     /**
-     * @var int|null
+     * @var Option<int>
      */
-    private $maxOccurs;
+    private Option $maxOccurs;
 
     /**
-     * @var array<array-key, mixed>|null
+     * @var Option<array<array-key, mixed>>
      */
-    private $restriction;
+    private Option $restriction;
 
     /**
-     * @var list<array{type: non-empty-string, namespace: non-empty-string, isList: bool}>|null
+     * @var Option<list<array{type: non-empty-string, namespace: non-empty-string, isList: bool}>>
      */
-    private $unions;
+    private Option $unions;
 
     /**
-     * @var null|string
+     * @var Option<string>
      */
-    private $use;
+    private Option $use;
 
     /**
-     * @var bool|null
+     * @var Option<bool>
      */
-    private $isQualified;
+    private Option $isQualified;
 
     /**
      * The soap-enc array-type information
      *
-     * @var array{type: non-empty-string, itemType: non-empty-string, namespace: non-empty-string}|null
+     * @var Option<array{type: non-empty-string, itemType: non-empty-string, namespace: non-empty-string}>
      */
-    private $arrayType;
+    private Option $arrayType;
 
     /**
      * The name of the internal array nodes for soap-enc arrays
      *
-     * @var string|null
+     * @var Option<string>
      */
-    private $arrayNodeName;
+    private Option $arrayNodeName;
+
+
+    public function __construct()
+    {
+        $none = Option::none();
+        $this->isAbstract = $none;
+        $this->default = $none;
+        $this->docs = $none;
+        $this->enums = $none;
+        $this->extends = $none;
+        $this->fixed = $none;
+        $this->isAlias = $none;
+        $this->isAttribute = $none;
+        $this->isElementValue = $none;
+        $this->isList = $none;
+        $this->isRepeatingElement = $none;
+        $this->isNullable = $none;
+        $this->isSimple = $none;
+        $this->isElement = $none;
+        $this->isLocal = $none;
+        $this->isNil = $none;
+        $this->minOccurs = $none;
+        $this->maxOccurs = $none;
+        $this->restriction = $none;
+        $this->unions = $none;
+        $this->use = $none;
+        $this->isQualified = $none;
+        $this->arrayType = $none;
+        $this->arrayNodeName = $none;
+    }
+
 
     /**
      * @return Option<bool>
      */
     public function isAbstract(): Option
     {
-        return from_nullable($this->isAbstract);
+        return $this->isAbstract;
     }
 
     public function withIsAbstract(?bool $abstract): self
     {
         $new = clone $this;
-        $new->isAbstract = $abstract;
+        $new->isAbstract = from_nullable($abstract);
 
         return $new;
     }
@@ -163,13 +194,13 @@ final class TypeMeta
      */
     public function default(): Option
     {
-        return from_nullable($this->default);
+        return $this->default;
     }
 
     public function withDefault(?string $default): self
     {
         $new = clone $this;
-        $new->default = $default;
+        $new->default = from_nullable($default);
 
         return $new;
     }
@@ -179,13 +210,13 @@ final class TypeMeta
      */
     public function docs(): Option
     {
-        return from_nullable($this->docs);
+        return $this->docs;
     }
 
     public function withDocs(?string $docs): self
     {
         $new = clone $this;
-        $new->docs = $docs;
+        $new->docs = from_nullable($docs);
 
         return $new;
     }
@@ -195,7 +226,7 @@ final class TypeMeta
      */
     public function enums(): Option
     {
-        return from_nullable($this->enums);
+        return $this->enums;
     }
 
     /**
@@ -204,7 +235,7 @@ final class TypeMeta
     public function withEnums(?array $enums): self
     {
         $new = clone $this;
-        $new->enums = optional(vec(string()))->coerce($enums);
+        $new->enums = from_nullable(optional(vec(string()))->coerce($enums));
 
         return $new;
     }
@@ -214,7 +245,7 @@ final class TypeMeta
      */
     public function extends(): Option
     {
-        return from_nullable($this->extends);
+        return $this->extends;
     }
 
     /**
@@ -223,13 +254,13 @@ final class TypeMeta
     public function withExtends(?array $extends): self
     {
         $new = clone $this;
-        $new->extends = optional(
+        $new->extends = from_nullable(optional(
             shape([
                 'type' => non_empty_string(),
                 'namespace' => non_empty_string(),
                 'isSimple' => optional(bool()),
             ], true)
-        )->coerce($extends);
+        )->coerce($extends));
 
         return $new;
     }
@@ -239,13 +270,13 @@ final class TypeMeta
      */
     public function fixed(): Option
     {
-        return from_nullable($this->fixed);
+        return $this->fixed;
     }
 
     public function withFixed(?string $fixed): self
     {
         $new = clone $this;
-        $new->fixed = $fixed;
+        $new->fixed = from_nullable($fixed);
 
         return $new;
     }
@@ -255,13 +286,13 @@ final class TypeMeta
      */
     public function isAlias(): Option
     {
-        return from_nullable($this->isAlias);
+        return $this->isAlias;
     }
 
     public function withIsAlias(?bool $isAlias): self
     {
         $new = clone $this;
-        $new->isAlias = $isAlias;
+        $new->isAlias = from_nullable($isAlias);
 
         return $new;
     }
@@ -271,13 +302,13 @@ final class TypeMeta
      */
     public function isAttribute(): Option
     {
-        return from_nullable($this->isAttribute);
+        return $this->isAttribute;
     }
 
     public function withIsAttribute(?bool $isAttribute): self
     {
         $new = clone $this;
-        $new->isAttribute = $isAttribute;
+        $new->isAttribute = from_nullable($isAttribute);
 
         return $new;
     }
@@ -287,13 +318,13 @@ final class TypeMeta
      */
     public function isElementValue(): Option
     {
-        return from_nullable($this->isElementValue);
+        return $this->isElementValue;
     }
 
     public function withIsElementValue(?bool $isElementValue): self
     {
         $new = clone $this;
-        $new->isElementValue = $isElementValue;
+        $new->isElementValue = from_nullable($isElementValue);
 
         return $new;
     }
@@ -303,13 +334,13 @@ final class TypeMeta
      */
     public function isList(): Option
     {
-        return from_nullable($this->isList);
+        return $this->isList;
     }
 
     public function withIsList(?bool $isList): self
     {
         $new = clone $this;
-        $new->isList = $isList;
+        $new->isList = from_nullable($isList);
 
         return $new;
     }
@@ -319,13 +350,13 @@ final class TypeMeta
      */
     public function isRepeatingElement(): Option
     {
-        return from_nullable($this->isRepeatingElement);
+        return $this->isRepeatingElement;
     }
 
     public function withIsRepeatingElement(?bool $isRepeatingElement): self
     {
         $new = clone $this;
-        $new->isRepeatingElement = $isRepeatingElement;
+        $new->isRepeatingElement = from_nullable($isRepeatingElement);
 
         return $new;
     }
@@ -335,13 +366,13 @@ final class TypeMeta
      */
     public function isNullable(): Option
     {
-        return from_nullable($this->isNullable);
+        return $this->isNullable;
     }
 
     public function withIsNullable(?bool $isNullable): self
     {
         $new = clone $this;
-        $new->isNullable = $isNullable;
+        $new->isNullable = from_nullable($isNullable);
 
         return $new;
     }
@@ -351,13 +382,13 @@ final class TypeMeta
      */
     public function isSimple(): Option
     {
-        return from_nullable($this->isSimple);
+        return $this->isSimple;
     }
 
     public function withIsSimple(?bool $isSimple): self
     {
         $new = clone $this;
-        $new->isSimple = $isSimple;
+        $new->isSimple = from_nullable($isSimple);
 
         return $new;
     }
@@ -367,13 +398,13 @@ final class TypeMeta
      */
     public function isElement(): Option
     {
-        return from_nullable($this->isElement);
+        return $this->isElement;
     }
 
     public function withIsElement(?bool $isElement): self
     {
         $new = clone $this;
-        $new->isElement = $isElement;
+        $new->isElement = from_nullable($isElement);
 
         return $new;
     }
@@ -383,13 +414,13 @@ final class TypeMeta
      */
     public function isLocal(): Option
     {
-        return from_nullable($this->isLocal);
+        return $this->isLocal;
     }
 
     public function withIsLocal(?bool $local): self
     {
         $new = clone $this;
-        $new->isLocal = $local;
+        $new->isLocal = from_nullable($local);
 
         return $new;
     }
@@ -399,13 +430,13 @@ final class TypeMeta
      */
     public function isNil(): Option
     {
-        return from_nullable($this->isNil);
+        return $this->isNil;
     }
 
     public function withIsNil(?bool $nil): self
     {
         $new = clone $this;
-        $new->isNil = $nil;
+        $new->isNil = from_nullable($nil);
 
         return $new;
     }
@@ -415,13 +446,13 @@ final class TypeMeta
      */
     public function minOccurs(): Option
     {
-        return from_nullable($this->minOccurs);
+        return $this->minOccurs;
     }
 
     public function withMinOccurs(?int $min): self
     {
         $new = clone $this;
-        $new->minOccurs = $min;
+        $new->minOccurs = from_nullable($min);
 
         return $new;
     }
@@ -431,13 +462,13 @@ final class TypeMeta
      */
     public function maxOccurs(): Option
     {
-        return from_nullable($this->maxOccurs);
+        return $this->maxOccurs;
     }
 
     public function withMaxOccurs(?int $max): self
     {
         $new = clone $this;
-        $new->maxOccurs = $max;
+        $new->maxOccurs = from_nullable($max);
 
         return $new;
     }
@@ -447,7 +478,7 @@ final class TypeMeta
      */
     public function restriction(): Option
     {
-        return from_nullable($this->restriction);
+        return $this->restriction;
     }
 
     /**
@@ -456,7 +487,7 @@ final class TypeMeta
     public function withRestriction(?array $restriction): self
     {
         $new = clone $this;
-        $new->restriction = optional(mixed_dict())->coerce($restriction);
+        $new->restriction = from_nullable(optional(mixed_dict())->coerce($restriction));
 
         return $new;
     }
@@ -466,7 +497,7 @@ final class TypeMeta
      */
     public function unions(): Option
     {
-        return from_nullable($this->unions);
+        return $this->unions;
     }
 
     /**
@@ -475,7 +506,7 @@ final class TypeMeta
     public function withUnions(?array $unions): self
     {
         $new = clone $this;
-        $new->unions = optional(
+        $new->unions = from_nullable(optional(
             vec(
                 shape([
                     'type' => non_empty_string(),
@@ -483,7 +514,7 @@ final class TypeMeta
                     'isList' => bool(),
                 ], true)
             )
-        )->coerce($unions);
+        )->coerce($unions));
 
         return $new;
     }
@@ -493,13 +524,13 @@ final class TypeMeta
      */
     public function use(): Option
     {
-        return from_nullable($this->use);
+        return $this->use;
     }
 
     public function withUse(?string $use): self
     {
         $new = clone $this;
-        $new->use = $use;
+        $new->use = from_nullable($use);
 
         return $new;
     }
@@ -509,13 +540,13 @@ final class TypeMeta
      */
     public function isQualified(): Option
     {
-        return from_nullable($this->isQualified);
+        return $this->isQualified;
     }
 
     public function withIsQualified(?bool $qualified): self
     {
         $new = clone $this;
-        $new->isQualified = $qualified;
+        $new->isQualified = from_nullable($qualified);
 
         return $new;
     }
@@ -525,7 +556,7 @@ final class TypeMeta
      */
     public function arrayType(): Option
     {
-        return from_nullable($this->arrayType);
+        return $this->arrayType;
     }
 
     /**
@@ -534,13 +565,13 @@ final class TypeMeta
     public function withArrayType(?array $arrayType): self
     {
         $new = clone $this;
-        $new->arrayType = optional(
+        $new->arrayType = from_nullable(optional(
             shape([
                 'type' => non_empty_string(),
                 'itemType' => non_empty_string(),
                 'namespace' => non_empty_string(),
             ], true)
-        )->coerce($arrayType);
+        )->coerce($arrayType));
 
         return $new;
     }
@@ -550,13 +581,13 @@ final class TypeMeta
      */
     public function arrayNodeName(): Option
     {
-        return from_nullable($this->arrayNodeName);
+        return $this->arrayNodeName;
     }
 
     public function withArrayNodeName(?string $arrayNodeName): self
     {
         $new = clone $this;
-        $new->arrayNodeName = $arrayNodeName;
+        $new->arrayNodeName = from_nullable($arrayNodeName);
 
         return $new;
     }
