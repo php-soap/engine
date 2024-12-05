@@ -106,7 +106,7 @@ final class XsdType
     public static function fetchAllKnownBaseTypeMappings(): array
     {
         return [
-            'any' => 'mixed',
+            'any' => 'string',
             'anytype' => 'mixed',
             'anyuri' => 'string',
             'anyxml' => 'string',
