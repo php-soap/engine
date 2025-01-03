@@ -64,4 +64,19 @@ final class MethodCollection implements Countable, IteratorAggregate
 
         throw MetadataException::methodNotFound($name);
     }
+
+    /**
+     * @throws MetadataException
+     */
+    public function fetchBySoapAction(string $soapAction): Method
+    {
+        foreach ($this->methods as $method) {
+            $meta = $method->getMeta();
+            if ($meta->action()->isSome() && $soapAction === $meta->action()->unwrap()) {
+                return $method;
+            }
+        }
+
+        throw MetadataException::methodNotFound($soapAction);
+    }
 }
