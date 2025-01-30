@@ -95,15 +95,17 @@ $engine = new PartialDriver(metadata: $metadata);
   * **ExtSoapClientTransport:** Uses PHP's `SoapClient` to handle SOAP requests.
   * **ExtSoapServerTransport:** Uses PHP's `SoapServer` to handle SOAP requests. 
   * **TraceableTransport:** Can be used to decorate another transport and keeps track of the last request and response.
-    
 
 * [psr18-transport](https://github.com/php-soap/psr18-transport/): Leverages your PSR-18 HTTP client to deal with the HTTP Layer.
   * **Psr18Transport**: Uses a PSR-18 HTTP client to handle SOAP requests. You can also use fiber-based Async clients!
   * Provides middleware to deal with some common SOAP quirks.
 
-
 * [wsdl-reader](https://github.com/php-soap/wsdl-reader/): Provides an XML based PHP implementation for collecting WSDL meta-data.
   * **Wsdl1MetadataProvider**: Provides the methods and types from any WSDL 1 document.
+
+* [encoding](https://github.com/php-soap/encoding): Provides a pure PHP drop-in replacement for the ext-soap encoding logic.
+  * **Encoder**: Encodes mixed data into a valid SOAP Request.
+  * **Decoder**: Decodes a SOAP Response into mixed data.
 
 ## Creating your own engine
 
