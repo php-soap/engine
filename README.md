@@ -104,6 +104,7 @@ $engine = new PartialDriver(metadata: $metadata);
   * **Wsdl1MetadataProvider**: Provides the methods and types from any WSDL 1 document.
 
 * [encoding](https://github.com/php-soap/encoding): Provides a pure PHP drop-in replacement for the ext-soap encoding logic.
+  * **Driver**: Combines the encoder, decoder and wsdl-reader metadata into a usable vanilla PHP preset. 
   * **Encoder**: Encodes mixed data into a valid SOAP Request.
   * **Decoder**: Decodes a SOAP Response into mixed data.
 
