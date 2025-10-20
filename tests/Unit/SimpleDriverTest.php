@@ -18,11 +18,11 @@ final class SimpleDriverTest extends TestCase
 
     protected function setUp(): void
     {
-        $encoder = $this->createStub(Encoder::class);
+        $encoder = static::createStub(Encoder::class);
         $encoder->method('encode')->willReturn(
             $this->request = new SoapRequest('', '', '', SoapRequest::SOAP_1_1)
         );
-        $decoder = $this->createStub(Decoder::class);
+        $decoder = static::createStub(Decoder::class);
         $decoder->method('decode')->willReturn([]);
         $metadata = new DummyInMemoryMetadata();
 

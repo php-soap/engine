@@ -16,7 +16,7 @@ final class PartialDriverTest extends TestCase
 {
     public function test_it_can_encode(): void
     {
-        $encoder = $this->createStub(Encoder::class);
+        $encoder = static::createStub(Encoder::class);
         $encoder->method('encode')->willReturn(
             $request = new SoapRequest('', '', '', SoapRequest::SOAP_1_1)
         );
@@ -35,7 +35,7 @@ final class PartialDriverTest extends TestCase
 
     public function test_it_can_decode(): void
     {
-        $decoder = $this->createStub(Decoder::class);
+        $decoder = static::createStub(Decoder::class);
         $decoder->method('decode')->willReturn([]);
         $driver = new PartialDriver(decoder: $decoder);
 
