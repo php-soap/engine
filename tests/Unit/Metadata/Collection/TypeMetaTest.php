@@ -34,6 +34,10 @@ final class TypeMetaTest extends TestCase
         $value = ['hello', 'world'];
         $meta = (new TypeMeta())->withEnums($value);
         static::assertSame($value, $meta->enums()->unwrapOr(null));
+
+        $emptied = $meta->withEnums(null);
+        static::assertNotSame($meta, $emptied);
+        static::assertTrue($emptied->enums()->isNone());
     }
 
     public function test_it_has_extends()
@@ -44,6 +48,10 @@ final class TypeMetaTest extends TestCase
         ];
         $meta = (new TypeMeta())->withExtends($value);
         static::assertSame($value, $meta->extends()->unwrapOr(null));
+
+        $emptied = $meta->withExtends(null);
+        static::assertNotSame($meta, $emptied);
+        static::assertTrue($emptied->extends()->isNone());
     }
 
     public function test_it_has_fixed()
@@ -135,6 +143,10 @@ final class TypeMetaTest extends TestCase
         $value = ['mixed' => ['content']];
         $meta = (new TypeMeta())->withRestriction($value);
         static::assertSame($value, $meta->restriction()->unwrapOr(null));
+
+        $emptied = $meta->withRestriction(null);
+        static::assertNotSame($meta, $emptied);
+        static::assertTrue($emptied->restriction()->isNone());
     }
 
     public function test_it_has_unions()
@@ -148,6 +160,10 @@ final class TypeMetaTest extends TestCase
         ];
         $meta = (new TypeMeta())->withUnions($value);
         static::assertSame($value, $meta->unions()->unwrapOr(null));
+
+        $emptied = $meta->withUnions(null);
+        static::assertNotSame($meta, $emptied);
+        static::assertTrue($emptied->unions()->isNone());
     }
 
     public function test_it_has_use()
