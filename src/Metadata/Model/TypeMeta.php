@@ -9,6 +9,7 @@ use function Psl\Option\from_nullable;
 use function Psl\Type\bool;
 use function Psl\Type\mixed_dict;
 use function Psl\Type\non_empty_string;
+use function Psl\Type\nullable;
 use function Psl\Type\optional;
 use function Psl\Type\shape;
 use function Psl\Type\string;
@@ -235,7 +236,7 @@ final class TypeMeta
     public function withEnums(?array $enums): self
     {
         $new = clone $this;
-        $new->enums = from_nullable(optional(vec(string()))->coerce($enums));
+        $new->enums = from_nullable(nullable(vec(string()))->coerce($enums));
 
         return $new;
     }
@@ -254,7 +255,7 @@ final class TypeMeta
     public function withExtends(?array $extends): self
     {
         $new = clone $this;
-        $new->extends = from_nullable(optional(
+        $new->extends = from_nullable(nullable(
             shape([
                 'type' => non_empty_string(),
                 'namespace' => non_empty_string(),
@@ -487,7 +488,7 @@ final class TypeMeta
     public function withRestriction(?array $restriction): self
     {
         $new = clone $this;
-        $new->restriction = from_nullable(optional(mixed_dict())->coerce($restriction));
+        $new->restriction = from_nullable(nullable(mixed_dict())->coerce($restriction));
 
         return $new;
     }
@@ -506,7 +507,7 @@ final class TypeMeta
     public function withUnions(?array $unions): self
     {
         $new = clone $this;
-        $new->unions = from_nullable(optional(
+        $new->unions = from_nullable(nullable(
             vec(
                 shape([
                     'type' => non_empty_string(),
@@ -565,7 +566,7 @@ final class TypeMeta
     public function withArrayType(?array $arrayType): self
     {
         $new = clone $this;
-        $new->arrayType = from_nullable(optional(
+        $new->arrayType = from_nullable(nullable(
             shape([
                 'type' => non_empty_string(),
                 'itemType' => non_empty_string(),
