@@ -15,9 +15,12 @@
         }
     ],
     "require": {
-        "php": "~8.3.0 || ~8.4.0 || ~8.5.0",
-        "php-standard-library/php-standard-library": "^3.0 || ^4.0 || ^5.0 || ^6.0",
-        "php-soap/xml": "^1.9.0"
+        "php": "~8.4.0 || ~8.5.0",
+        "php-standard-library/dict": "^6.1",
+        "php-standard-library/foundation": "^6.1",
+        "php-standard-library/option": "^6.1",
+        "php-standard-library/type": "^6.1",
+        "php-soap/xml": "^1.10.0"
     },
     "autoload-dev": {
         "psr-4": {

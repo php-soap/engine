@@ -2,7 +2,7 @@
 <psalm
     errorLevel="1"
     strictBinaryOperands="true"
-    phpVersion="8.1"
+    phpVersion="8.4"
     allowStringToStandInForClass="true"
     rememberPropertyAssignmentsAfterCall="false"
     skipChecksOnUnresolvableIncludes="false"
@@ -21,4 +21,10 @@
             <directory name="tests"/>
         </ignoreFiles>
     </projectFiles>
-<plugins><pluginClass class="Psl\Psalm\Plugin"/></plugins></psalm>
+    <stubs>
+        <file name="vendor/veewee/xml/stubs/DOM.phpstub" />
+    </stubs>
+    <plugins>
+        <pluginClass class="Psl\Psalm\Plugin"/>
+    </plugins>
+</psalm>
