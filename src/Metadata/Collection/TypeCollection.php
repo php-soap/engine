@@ -7,11 +7,9 @@ namespace Soap\Engine\Metadata\Collection;
 use ArrayIterator;
 use Countable;
 use IteratorAggregate;
-use Psl\Option\Option;
 use Soap\Engine\Exception\MetadataException;
 use Soap\Engine\Metadata\Model\Type;
 use function Psl\Dict\reindex;
-use function Psl\Option\from_nullable;
 
 /**
  * @implements IteratorAggregate<int<0,max>, Type>
@@ -110,13 +108,11 @@ final class TypeCollection implements Countable, IteratorAggregate
     }
 
     /**
-     * Convention: fetch* throws when the type is missing, find* returns an Option.
-     *
-     * @return Option<Type>
+     * Convention: fetch* throws when the type is missing, find* returns null.
      */
-    public function findByNameAndXmlNamespace(string $name, string $namespace): Option
+    public function findByNameAndXmlNamespace(string $name, string $namespace): ?Type
     {
-        return from_nullable($this->qualifiedLookup[self::createLookupKey($name, $namespace)] ?? null);
+        return $this->qualifiedLookup[self::createLookupKey($name, $namespace)] ?? null;
     }
 
     /**
@@ -124,9 +120,8 @@ final class TypeCollection implements Countable, IteratorAggregate
      */
     public function fetchByNameAndXmlNamespace(string $name, string $namespace): Type
     {
-        return $this->findByNameAndXmlNamespace($name, $namespace)->unwrapOrElse(
-            static fn (): never => throw MetadataException::typeNotFound($name)
-        );
+        return $this->findByNameAndXmlNamespace($name, $namespace)
+            ?? throw MetadataException::typeNotFound($name);
     }
 
     private static function createLookupKey(string $name, string $namespace): string
