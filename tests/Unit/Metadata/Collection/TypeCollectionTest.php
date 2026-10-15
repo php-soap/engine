@@ -58,6 +58,22 @@ final class TypeCollectionTest extends TestCase
         $this->collection->fetchByNameAndXmlNamespace('Response', 'http://invalid');
     }
 
+    public function test_it_can_find_by_name_and_namespace(): void
+    {
+        $type = $this->collection->findByNameAndXmlNamespace('Response', 'http://namesapce');
+        static::assertSame('Response', $type?->getName());
+    }
+
+    public function test_it_finds_nothing_by_name_and_namespace_for_invalid_name(): void
+    {
+        static::assertNull($this->collection->findByNameAndXmlNamespace('nope', 'http://namesapce'));
+    }
+
+    public function test_it_finds_nothing_by_name_and_namespace_for_other_namespace(): void
+    {
+        static::assertNull($this->collection->findByNameAndXmlNamespace('Response', 'http://invalid'));
+    }
+
     public function test_it_can_reduce(): void
     {
         $result = $this->collection->reduce(static fn (int $i, Type $item) => $i + 1, 0);
