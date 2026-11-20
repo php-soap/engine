@@ -28,7 +28,7 @@
         }
     },
     "require-dev": {
-        "phpunit/phpunit": "^12.3",
+        "phpunit/phpunit": "^13.4",
         "php-standard-library/psalm-plugin": "^2.5",
         "vimeo/psalm": "^7.12",
         "php-cs-fixer/shim": "^3.88"
