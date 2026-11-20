@@ -9,7 +9,6 @@ use Countable;
 use IteratorAggregate;
 use Soap\Engine\Exception\MetadataException;
 use Soap\Engine\Metadata\Model\Type;
-use function array_key_exists;
 use function Psl\Dict\reindex;
 
 /**
@@ -109,16 +108,20 @@ final class TypeCollection implements Countable, IteratorAggregate
     }
 
     /**
+     * Convention: fetch* throws when the type is missing, find* returns null.
+     */
+    public function findByNameAndXmlNamespace(string $name, string $namespace): ?Type
+    {
+        return $this->qualifiedLookup[self::createLookupKey($name, $namespace)] ?? null;
+    }
+
+    /**
      * @throws MetadataException
      */
     public function fetchByNameAndXmlNamespace(string $name, string $namespace): Type
     {
-        $lookupKey = self::createLookupKey($name, $namespace);
-        if (!array_key_exists($lookupKey, $this->qualifiedLookup)) {
-            throw MetadataException::typeNotFound($name);
-        }
-
-        return $this->qualifiedLookup[$lookupKey];
+        return $this->findByNameAndXmlNamespace($name, $namespace)
+            ?? throw MetadataException::typeNotFound($name);
     }
 
     private static function createLookupKey(string $name, string $namespace): string
